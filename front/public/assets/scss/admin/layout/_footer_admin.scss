@@ -1,0 +1,40 @@
+/**=====================
+  7.1 Footer Scss Start
+==========================**/
+
+@use '../../base/variables.scss';
+
+.footer {
+  background-color: variables.$footer_bg_color;
+  padding: 15px;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  z-index: 7;
+  margin-left: variables.$sidebar-compact-width;
+  transition: 0.5s;
+
+  @media (max-width: '992px') {
+    margin-left: 0;
+    width: 100%;
+  }
+  p {
+    font-size: calc(13px + (16 - 13) * ((100vw - 320px) / (1920 - 320)));
+    @media (max-width: '576px') {
+      text-align: center;
+    }
+    .footer-icon {
+      height: 18px;
+      vertical-align: middle;
+      width: 22px;
+    }
+  }
+}
+.footer-fix {
+  width: calc(100% - variables.$sidebar-compact-width);
+  position: fixed;
+}
+
+/**=====================
+    Footer Scss Ends
+==========================**/

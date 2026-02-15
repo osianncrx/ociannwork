@@ -1,0 +1,193 @@
+.dashboard-admin {
+  padding: 0 calc(8px + (24 - 8) * ((100vw - 320px) / (1920 - 320)))
+    calc(8px + (24 - 8) * ((100vw - 320px) / (1920 - 320)));
+  .card {
+    margin-bottom: calc(14px + (24 - 14) * ((100vw - 320px) / (1920 - 320)));
+    border: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 40px 0px #acabb61a;
+    background-position: center;
+    transition: 0.5s;
+
+    body.dark & {
+      box-shadow: unset !important;
+    }
+    &:hover {
+      transform: translateY(-5px);
+      transition: 0.5s;
+    }
+    &.widget {
+      background-image: url('/assets/images/dashboard/card-bg.png');
+      background-size: cover;
+      .card-body {
+        padding: calc(14px + (23 - 14) * ((100vw - 320px) / (1920 - 320)));
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .widget-content {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 12px;
+          span {
+            &.f-light {
+              font-size: 16px;
+              font-weight: 400;
+              color: rgba(var(--sidebar-text-color), 1);
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 1814px) and (min-width: 1400px) {
+        .card-body {
+          flex-direction: column;
+          align-items: start;
+          .widget-content {
+            span {
+              &.f-light {
+                text-wrap: nowrap;
+              }
+            }
+          }
+        }
+        .font-success,
+        .font-danger {
+          margin-left: 64px;
+        }
+      }
+      @media (max-width: '400px') {
+        .card-body {
+          flex-direction: column;
+          align-items: start;
+          .widget-content {
+            span {
+              &.f-light {
+                text-wrap: nowrap;
+              }
+            }
+          }
+        }
+        .font-success,
+        .font-danger {
+          margin-left: 64px;
+        }
+      }
+    }
+    .card-body {
+      .message-type-chart {
+        body.dark & {
+          .apexcharts-canvas svg .apexcharts-datalabels-group .apexcharts-text {
+            fill: rgba(var(--white), 1) !important;
+          }
+          .apexcharts-canvas svg .apexcharts-inner {
+            .apexcharts-pie {
+              .apexcharts-slices {
+                .apexcharts-pie-series {
+                  path {
+                    stroke: rgba(var(--darkest-color-3), 1);
+                  }
+                }
+              }
+            }
+          }
+          .apexcharts-canvas {
+            .apexcharts-legend {
+              .apexcharts-legend-series {
+                .apexcharts-legend-text {
+                  color: rgba(var(--white), 1) !important;
+                }
+              }
+            }
+          }
+        }
+      }
+      .progressbar-chart {
+        body.dark & {
+          .apexcharts-canvas {
+            svg {
+              text {
+                &.apexcharts-title-text , &.apexcharts-subtitle-text {
+                  fill: rgba(var(--white), 1) !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .increasing {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      span {
+        color: rgba(var(--success-d-color), 1);
+      }
+      svg {
+        fill: rgba(var(--success-d-color), 1);
+        background-color: rgba(var(--success-d-color), 0.1);
+        padding: 2px;
+        border-radius: 8px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+    .decreasing {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      span {
+        color: rgba(var(--danger-d-color), 1);
+      }
+      svg {
+        fill: rgba(var(--danger-d-color), 1);
+        background-color: rgba(var(--danger-d-color), 0.1);
+        padding: 2px;
+        border-radius: 8px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+
+  .storage-progress-bar {
+    height: 24px;
+    border-radius: 12px;
+    overflow: visible;
+    background-color: rgba(var(--search-input-color), 1);
+    box-shadow: inset 0 1px 2px rgba(var(--black), 0.1);
+    position: relative;
+  }
+
+  .storage-progress-segment {
+    position: absolute;
+    height: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(var(--white), 1);
+    text-shadow: 0 1px 2px rgba(var(--black), 0.5);
+    padding: 0 4px;
+  }
+
+  .storage-segment-label {
+    display: flex;
+    align-items: center;
+  }
+
+  .storage-segment-icon {
+    font-size: 9px;
+  }
+
+  .storage-color-indicator {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 2px rgba(var(--black), 0.2);
+  }
+}

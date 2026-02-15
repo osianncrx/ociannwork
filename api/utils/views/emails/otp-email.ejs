@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        /* Reset styles for email clients */
+        body,
+        table,
+        td,
+        a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        /* Main styles */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+
+        .header {
+            background-color: #5579f8;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .content {
+            padding: 30px;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777777;
+        }
+
+        .otp-code {
+            background-color: #f8f9fa;
+            border: 2px dashed #5579f8;
+            padding: 20px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            color: #5579f8;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #eeeeee;
+            margin: 20px 0;
+        }
+
+        .security-icon {
+            text-align: center;
+            font-size: 48px;
+            color: #5579f8;
+            margin: 20px 0;
+        }
+
+        .warning {
+            background-color: #fff8e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #5579f8;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" bgcolor="#f6f6f6">
+                <!-- Container -->
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="container">
+                    <!-- Header -->
+                    <tr>
+                        <td align="center" bgcolor="#5579f8" class="header">
+                            <h1>Verification Code</h1>
+                        </td>
+                    </tr>
+                    <!-- Content -->
+                    <tr>
+                        <td class="content">
+                            <h2>Hello,</h2>
+                            
+                            <p>You've requested to verify your identity. Use the following One-Time Password (OTP) to complete your action:</p>
+
+                            <div class="otp-code">
+                                <%= otp %>
+                            </div>
+
+                            <p>This verification code will expire in <strong><%= expirationMinutes %> minutes</strong>.</p>
+
+
+                            <div class="divider"></div>
+
+                            <p>If you didn't request this verification, please ignore this email or contact our support team immediately if you're concerned about your account's security.</p>
+
+ 
+                        </td>
+                    </tr>
+                    <!-- Footer -->
+                    <tr>
+                        <td class="footer">
+                            <p>&copy; <%= currentYear %> <%= siteName || 'Our Company' %>. All rights reserved.</p>
+                            <p>This is an automated message. Please do not reply to this email.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

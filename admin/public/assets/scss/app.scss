@@ -1,0 +1,45 @@
+@use "sass:color";
+
+// bootstrap+
+@use "bootstrap/dist/css/bootstrap.min.css";
+
+// *** utils ***
+@use "utils/variables"; 
+
+
+//	*** pages ***
+@use "pages/login";
+@use "pages/profile";
+@use "pages/team-manage.scss";
+
+//	*** base ***
+@use "base/typography";
+@use "base/reset";
+@use "./style.scss";
+@use "base/dark";
+@use "base/dashboard_admin";
+
+
+
+
+// *** layout *** 
+@use "layout/sidebar"; 
+// @use "layout/header"; 
+@use "layout/footer";
+
+// *** components *** 
+@use "components/card";
+
+
+
+
+
+
+
+// simplebar
+@use 'simplebar-react/dist/simplebar.min.css';
+// @import 'simplebar-react/dist/simplebar.min.css';
+
+
+
+

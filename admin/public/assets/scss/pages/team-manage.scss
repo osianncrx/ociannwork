@@ -1,0 +1,197 @@
+/**=====================
+     Profile CSS Start
+==========================**/
+@use '../utils/variables.scss';
+
+.tab-section {
+  margin: 0px 0px 30px 0px;
+
+  .tabs-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .nav-tabs {
+      border: none;
+
+      .nav-item {
+        position: relative;
+        border-bottom: none;
+        --bs-nav-tabs-link-active-bg: transparent;
+
+        .nav-link {
+          border: none;
+          padding: 3px 15px;
+          font-size: 16px;
+          font-weight: 500;
+          color: variables.$text-color;
+
+          .common-svg-btn {
+            stroke: variables.$text-color;
+          }
+
+          &.active {
+            color: variables.$primary-color;
+
+            .common-svg-btn {
+              stroke: variables.$primary-color;
+            }
+
+            &::after {
+              content: '';
+              background-color: variables.$primary-color;
+              width: calc(100% - 0px);
+              position: absolute;
+              height: 2px;
+              bottom: -8px;
+              left: 1px;
+            }
+          }
+        }
+
+        &:first-child {
+          &::before {
+            display: none;
+          }
+        }
+
+        &::before {
+          content: '';
+          height: calc(100% - 0px);
+          width: 1px;
+          position: absolute;
+          background-color: variables.$tab-border-color;
+        }
+      }
+    }
+  }
+
+  .filterInputGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 8px;
+      border-radius: 6px;
+
+      button {
+        padding: 10px 20px;
+        min-width: 168px;
+      }
+    }
+
+    .search-bar {
+      .form-group {
+        position: relative;
+
+        &::before {
+          content: '';
+          width: 1px;
+          height: calc(100% - 15px);
+          position: absolute;
+          right: 55px;
+          top: 7px;
+          background-color: variables.$light-gray;
+        }
+
+        input {
+          border-radius: 5px;
+          width: 336px;
+          padding: 10px 44px 10px 20px;
+          border: 1px solid variables.$search-input-color;
+
+          &::placeholder {
+            color: variables.$input-text-color;
+          }
+        }
+
+        .search-bar-icon {
+          height: 20px;
+          width: 20px;
+          position: absolute;
+          top: 12px;
+          right: 20px;
+        }
+      }
+    }
+  }
+}
+
+.settings-logo-upload {
+  .settings-logo-upload__item {
+    position: relative;
+
+    &.item-before {
+      &::before {
+        content: '';
+        background-color: variables.$search-input-color;
+        width: 1px;
+        position: absolute;
+        height: calc(100% - 0px);
+        right: 60px;
+      }
+    }
+
+    .settings-logo-upload__title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: calc(10px + (25 - 10) * ((100vw - 320px) / (1920 - 320)));
+    }
+
+    .settings-logo-upload__images {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      @media (max-width: '399px') {
+        justify-content: center;
+      }
+
+      .upload-box {
+        padding: 20px;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid variables.$search-input-color;
+        background-color: variables.$page-body-color;
+        border-radius: 5px;
+        position: relative;
+        cursor: pointer;
+
+        img {
+          width: 63px;
+          justify-content: center;
+          display: flex;
+          align-items: center;
+        }
+
+        .upload-box__remove {
+          position: absolute;
+          top: 0px;
+          border: none;
+          right: 0px;
+          border-bottom-right-radius: 5px;
+
+          .common-svg-hw {
+            height: 15px;
+            width: 15px;
+          }
+        }
+      }
+    }
+
+    .size-recommendation {
+      font-size: 12px;
+      color: #6b7280;
+      margin: 0;
+      font-style: italic;
+    }
+  }
+} 

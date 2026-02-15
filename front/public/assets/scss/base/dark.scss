@@ -1,0 +1,2717 @@
+body {
+  &.dark {
+    background-color: rgba(var(--darkest-color-3), 1);
+
+    .files-accordion-container,
+    .files-accordion-content,
+    .react-select__menu-list,
+    .custom-scrollbar {
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    }
+
+    .search-full {
+      .Typeahead {
+        .u-posRelative {
+          .search-input {
+            border-color: rgba(var(--white), 0.12);
+            background: rgba(var(--darkest-color), 1);
+            border: 1px solid transparent;
+            backdrop-filter: blur(36px);
+            box-shadow:
+              0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+              0px 0px 1.5px -3px #b3b3b3 inset,
+              0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+              0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+              0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+            color: rgba(var(--white), 1);
+          }
+        }
+      }
+
+      .search-results-dropdown {
+        .message-result {
+          background-color: rgba(var(--darkest-color-3), 1);
+        }
+      }
+    }
+
+    .common-svg-hw-btn {
+      fill: rgba(var(--time-text-color), 0.8);
+    }
+
+    .main-page {
+      .messenger-box {
+        .messenger-right {
+          background-color: rgba(var(--darkest-color-3), 1);
+
+          .user-profile-header {
+            background-color: rgba(var(--darkest-color-3), 1);
+            border-bottom: unset !important;
+            box-shadow: 0px 1px 10px rgba(var(--primary-color), 0.1);
+
+            .popover-container {
+              .user-profile-popover {
+                background-color: rgba(var(--darkest-color), 1);
+                border-color: rgba(var(--white), 0.12);
+
+                .popover-header {
+                  border-color: rgba(var(--white), 0.12);
+
+                  .popover-user-info {
+                    .popover-username {
+                      color: rgba(var(--white), 1) !important;
+                    }
+                  }
+                }
+
+                .popover-details {
+                  border-color: rgba(var(--white), 0.12);
+
+                  .detail-item {
+                    .detail-icon {
+                      stroke: rgba(var(--white), 1) !important;
+                    }
+
+                    .detail-text {
+                      color: rgba(var(--white), 1);
+                    }
+                  }
+                }
+
+                .popover-actions {
+                  .action-btn {
+                    color: rgba(var(--white), 1);
+                    border-color: rgba(var(--white), 0.12);
+                    background-color: rgba(var(--darkest-color-3), 1);
+
+                    .btn-icon {
+                      stroke: rgba(var(--white), 1) !important;
+                    }
+                  }
+                }
+              }
+            }
+
+            .settings {
+              &::after {
+                background-color: rgba(var(--white), 17%);
+              }
+            }
+
+            .user-info {
+              .text-group {
+                .name {
+                  color: rgba(var(--white), 1) !important;
+                }
+
+                .status {
+                  color: rgba(var(--white), 58%) !important;
+                }
+              }
+            }
+
+            .header-utilities {
+              .header-right-wrapper {
+                .search-full {
+                  background-color: rgba(var(--darkest-color), 1);
+
+                  input {
+                    &::placeholder {
+                      color: rgba(var(--white), 0.7);
+                    }
+                  }
+
+                  button {
+                    filter: invert(1);
+                  }
+                }
+
+                .header-search {
+                  .search-bar {
+                    stroke: rgba(var(--white), 1);
+                    fill: none;
+                  }
+                }
+              }
+            }
+
+            .settings {
+              svg {
+                fill: rgba(var(--white), 1) !important;
+
+                &.user-add {
+                  fill: rgba(var(--white), 1);
+                  stroke: none !important;
+                }
+              }
+            }
+          }
+
+          .contact-chat {
+            .contact-talk-section {
+              .contact-chat-sub {
+                .chat-list {
+                  .chat-item-data {
+                    &.received {
+                      .chat-content {
+                        .message-title {
+                          color: rgba(var(--white), 0.8);
+                        }
+
+                        .chat-messages {
+                          .message-sub-title {
+                            background-color: rgba(var(--darkest-color), 1);
+                            color: rgba(var(--white), 0.72);
+                          }
+
+                          .chat-messages-icon {
+                            .dropdown {
+                              .dropdown-menu {
+                                background-color: rgba(var(--darkest-color-2), 1);
+
+                                .dropdown-item {
+                                  color: rgba(var(--white), 1);
+
+                                  svg {
+                                    fill: rgba(var(--white), 1) !important;
+
+                                    &.copied-success {
+                                      fill: none !important;
+                                      stroke: rgba(var(--white), 1) !important;
+                                    }
+
+                                    &.delete {
+                                      fill: none !important;
+                                      stroke: rgba(var(--danger-color), 1) !important;
+                                    }
+
+                                    &.star-svg {
+                                      fill: rgba(var(--light-yellow-color), 1) !important;
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+
+                        .message-reactions {
+                          .reaction-emoji {
+                            border-color: rgba(var(--white), 25%);
+                            background-color: rgba(var(--darkest-color), 1);
+
+                            .count {
+                              color: rgba(var(--white), 1);
+                            }
+                          }
+                        }
+                      }
+
+                      .visible-chat-time {
+                        color: rgba(var(--time-text-color), 0.8);
+                      }
+
+                      .chat-item {
+                        .chat-content {
+                          .chat-messages {
+                            .chat-messages-width {
+                              .message-sub-title {
+                                .chat-pinned-box {
+                                  .common-svg-hw-btn {
+                                    fill: rgba(var(--time-text-color), 0.8);
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                    &.sent {
+                      .chat-content {
+                        .message-reactions {
+                          .reaction-emoji {
+                            border-color: rgba(var(--darkest-color), 1);
+                            background: rgba(var(--darkest-color), 1);
+                            border-width: 1px 0 0 1px;
+                            border-style: solid;
+                            backdrop-filter: blur(36px);
+                            box-shadow:
+                              0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                              0px 0px 1.5px -3px #b3b3b3 inset,
+                              0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                              0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                              0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+                            .count {
+                              color: rgba(var(--white), 1);
+                            }
+                          }
+                        }
+
+                        .chat-messages {
+                          .chat-messages-icon {
+                            .dropdown {
+                              .dropdown-menu {
+                                background-color: rgba(var(--darkest-color-2), 1);
+
+                                .dropdown-item {
+                                  color: rgba(var(--white), 1);
+
+                                  svg {
+                                    fill: rgba(var(--white), 1) !important;
+
+                                    &.copied-success {
+                                      fill: none !important;
+                                      stroke: rgba(var(--white), 1) !important;
+                                    }
+
+                                    &.delete {
+                                      fill: none !important;
+                                      stroke: rgba(var(--danger-color), 1) !important;
+                                    }
+
+                                    &.star-svg {
+                                      fill: rgba(var(--light-yellow-color), 1) !important;
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                    .chat-content {
+                      .chat-messages-icon {
+                        background: rgba(var(--darkest-color), 1);
+                        border-width: 1px 0 0 1px;
+                        border-style: solid;
+                        border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%) 1;
+                        backdrop-filter: blur(36px);
+                        box-shadow:
+                          0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                          0px 0px 1.5px -3px #b3b3b3 inset,
+                          0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                          0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                          0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset svg {
+                          fill: rgba(var(--white), 1);
+                        }
+                      }
+
+                      .chat-messages {
+                        &.replied-message {
+                          .reply-preview {
+                            .reply-content {
+                              .reply-content-box {
+                                svg {
+                                  stroke: rgba(var(--white), 1) !important;
+                                }
+
+                                .reply-sender {
+                                  color: rgba(var(--white), 1);
+                                }
+                              }
+
+                              span {
+                                color: rgba(var(--white), 1);
+                              }
+                            }
+                          }
+                        }
+
+                        .chat-messages-width {
+                          .file-message-container {
+                            .file-attachment {
+                              background-color: rgba(var(--darkest-color), 1);
+                              border-color: rgba(var(--white), 0.2);
+
+                              .file-info-section {
+                                .file-name-text {
+                                  color: rgba(var(--white), 1);
+                                }
+
+                                .file-download-hint {
+                                  color: rgba(var(--white), 90%);
+                                }
+                              }
+
+                              .download-indicator {
+                                color: rgba(var(--white), 1);
+                              }
+                            }
+                          }
+
+                          .message-audio {
+                            audio {
+                              &::-webkit-media-controls-enclosure {
+                                background: rgba(var(--darkest-color-1), 1);
+                                
+                              }
+
+                              &::-webkit-media-controls-play-button,
+                              &::-webkit-media-controls-mute-button {
+                                filter: invert(1);
+                              }
+
+                              &::-webkit-media-controls-current-time-display,
+                              &::-webkit-media-controls-time-remaining-display {
+                                color: rgba(var(--white), 1) !important;
+                              }
+
+                              &::-internal-media-controls-segmented-track {
+                                background-color: rgba(var(--white), 1) !important;
+                              }
+                            }
+                          }
+
+                          .reminder-message-content {
+                            span {
+                              color: rgba(var(--white), 1) !important;
+                            }
+                          }
+
+                          .reply-preview {
+                            .reply-content {
+                              .reply-text {
+                                color: rgba(var(--white), 1) !important;
+                              }
+                            }
+                          }
+                        }
+                      }
+
+                      .forwarded-indicator {
+                        background-color: rgba(var(--darkest-color), 1);
+                        color: rgba(var(--white), 1);
+
+                        svg {
+                          fill: rgba(var(--white), 1);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              .tap-bottom {
+                background-color: rgba(var(--darkest-color), 1);
+                border-color: rgba(var(--white), 0.2);
+
+                svg {
+                  fill: rgba(var(--white), 1) !important;
+                }
+              }
+
+              .chat-date-divider {
+                background-color: unset;
+
+                .date-badge {
+                  background-color: rgba(var(--darkest-color), 1);
+                  border-color: rgba(var(--darkest-color), 1);
+                }
+
+                &::before {
+                  background-color: rgba(var(--primary-color), 0.17);
+                }
+              }
+
+              .chat-date-description {
+                color: rgba(var(--white), 0.9);
+              }
+            }
+          }
+
+          .message-editor-chat-bg {
+            background-color: rgba(var(--darkest-color-3), 1);
+
+            .message-editor-chat {
+              border-color: #bcbcbc33;
+              background-color: rgba(var(--darkest-color-2), 1);
+
+              .reply-indicator-bar {
+                background: rgba(var(--darkest-color-2), 1);
+                border-radius: 16px 16px 0 0;
+
+                .reply-indicator-content {
+                  .reply-info {
+                    .reply-info-sender {
+                      .reply-sender-name {
+                        color: rgba(var(--white), 1);
+                      }
+                    }
+
+                    .message-reply {
+                      .reply-preview-text {
+                        color: rgba(var(--white), 1);
+                      }
+                    }
+                  }
+                }
+
+                ~ .message-editor {
+                  .editor-box {
+                    .editor-controls {
+                      .ql-container {
+                        border-radius: unset !important;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .editor-toolbar {
+            .editor-controls {
+              border-color: #bcbcbc33;
+
+              .ql-toolbar {
+                background: rgb(188 188 188 / 15%);
+                border: 1px 0 0 1px solid;
+                border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%) 1;
+                backdrop-filter: blur(36px);
+                box-shadow:
+                  0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                  0px 0px 1.5px -3px #b3b3b3 inset,
+                  0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                  0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                  0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
+
+                &.display {
+                  ~ .ql-container {
+                    border-radius: 0 0 0 0 !important;
+                  }
+                }
+              }
+
+              .ql-container {
+                border-radius: 16px 16px 0 0;
+
+                &.ql-snow {
+                  border-color: #bcbcbc33;
+
+                  .ql-editor {
+                    color: rgba(var(--white), 1) !important;
+
+                    p {
+                      color: rgba(var(--white), 1) !important;
+                    }
+                  }
+                }
+              }
+            }
+
+            .file-preview-container {
+              border-radius: 16px 16px 0 0;
+              border-top: 1px solid transparent !important;
+              background-color: rgba(var(--darkest-color-2), 1) !important;
+
+              .file-preview-header {
+                color: rgba(var(--white), 1) !important;
+
+                svg {
+                  fill: rgba(var(--white), 1);
+                }
+              }
+
+              .file-preview-list {
+                .file-preview-item {
+                  background-color: rgba(var(--darkest-color-3), 1) !important;
+                  border-color: rgba(var(--white), 0.12) !important;
+
+                  .file-info {
+                    .file-name {
+                      color: rgba(var(--white), 1) !important;
+                    }
+
+                    .file-details {
+                      span {
+                        color: rgba(var(--white), 60%);
+                      }
+                    }
+                  }
+                }
+              }
+
+              ~ .editor-controls .ql-container {
+                border-radius: 0 0 0 0 !important;
+              }
+            }
+
+            .editor-toolbar-wrapper {
+              background-color: rgba(var(--darkest-color-2), 1);
+              border-bottom-left-radius: 16px;
+              border-bottom-right-radius: 16px;
+
+              .editor-toolbar-box {
+                background-color: rgba(var(--darkest-color-2), 1) !important;
+                border-radius: 16px;
+              }
+            }
+          }
+        }
+
+        .messenger-left-sidebar {
+          .recent-default {
+            background-color: #222638;
+
+            .user-profile-header {
+              background-color: #222638;
+              border-color: rgba(var(--white), 0.12);
+
+              .user-info {
+                .status-dot {
+                  border-color: #1d1f25;
+                }
+
+                .avatar {
+                  span {
+                    color: rgba(var(--darkest-color), 1) !important;
+                  }
+                }
+              }
+
+              .name {
+                color: rgba(var(--white), 1) !important;
+              }
+            }
+
+            .chat-sidebar {
+              background-color: rgba(var(--darkest-color-2), 1);
+
+              .chat-list {
+                .chat-item {
+                  .chat-text {
+                    .chat-message {
+                      color: rgba(var(--white), 0.5);
+
+                      .chat-icon {
+                        fill: rgba(var(--white), 0.5);
+                      }
+                    }
+                  }
+
+                  .avatar-container {
+                    .status-dot {
+                      border-color: #191b1f;
+                    }
+                  }
+                }
+              }
+
+              .chat-sidebar-menu {
+                .sidebar-header {
+                  span {
+                    color: rgba(var(--white), 1);
+                  }
+                }
+
+                .chat-list {
+                  .chat-item {
+                    &.active,
+                    &:hover {
+                      background: rgba(var(--darkest-color), 1);
+                      border: 1px solid transparent;
+                      backdrop-filter: blur(36px);
+                      box-shadow:
+                        0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                        0px 0px 1.5px -3px #b3b3b3 inset,
+                        0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                        0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                        0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+                    }
+
+                    .chat-text {
+                      .chat-name {
+                        color: rgba(var(--white), 0.9);
+                      }
+                    }
+                  }
+                }
+              }
+
+              .search-box {
+                input {
+                  background: rgba(var(--darkest-color), 1);
+                  border: 1px solid transparent;
+                  backdrop-filter: blur(36px);
+                  box-shadow:
+                    0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                    0px 0px 1.5px -3px #b3b3b3 inset,
+                    0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                    0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                    0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+                  color: rgba(var(--white), 1);
+
+                  &::placeholder {
+                    color: rgba(var(--white), 0.7);
+                  }
+                }
+
+                .search-icon {
+                  svg {
+                    stroke: rgba(var(--white), 1);
+                  }
+                }
+              }
+            }
+
+            .setting-list {
+              color: rgba(var(--white), 1);
+
+              ul {
+                li {
+                  svg {
+                    stroke: rgba(var(--white), 1) !important;
+                    fill: none;
+                  }
+                }
+              }
+
+              .chat-list {
+                .chat-item {
+                  &:hover {
+                    background: rgba(var(--darkest-color), 1);
+                    backdrop-filter: blur(36px);
+                    box-shadow:
+                      0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                      0px 0px 1.5px -3px #b3b3b3 inset,
+                      0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                      0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                      0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+                  }
+                }
+              }
+            }
+
+            .custom-channel-details {
+              color: rgba(var(--white), 1);
+
+              .tab-section {
+                .tabs-wrapper {
+                  .nav-tabs {
+                    .nav-item {
+                      a {
+                        color: rgba(var(--white), 1);
+                      }
+                    }
+                  }
+                }
+              }
+
+              .tab-content {
+                .tab-pane {
+                  .recent-chats {
+                    .recent-dms-section,
+                    .recent-channels-section {
+                      .section-title {
+                        color: rgba(var(--white), 1);
+                      }
+
+                      .chat-list {
+                        .chat-item {
+                          .chat-text {
+                            .chat-name {
+                              color: rgba(var(--white), 1);
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  .team-members {
+                    .search-box {
+                      input {
+                        background: rgba(var(--darkest-color), 1);
+                        border: unset;
+                        border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%) 1;
+                        backdrop-filter: blur(36px);
+                        box-shadow:
+                          0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                          0px 0px 1.5px -3px #b3b3b3 inset,
+                          0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                          0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                          0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+                        color: rgba(var(--white), 1) !important;
+
+                        &::placeholder,
+                        > div {
+                          color: rgba(var(--white), 0.7);
+                        }
+                      }
+                    }
+
+                    svg {
+                      stroke: rgba(var(--white), 1);
+
+                      &.clear-search {
+                        fill: rgba(var(--white), 1) !important;
+                        stroke: none !important;
+                      }
+                    }
+
+                    .chat-list {
+                      .chat-item {
+                        .chat-text {
+                          .chat-name {
+                            color: rgba(var(--white), 1);
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  .channels {
+                    .input-aligns {
+                      .search-box {
+                        input {
+                          background: rgba(var(--darkest-color), 1);
+                          border: 1px solid transparent;
+                          backdrop-filter: blur(36px);
+                          box-shadow:
+                            0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                            0px 0px 1.5px -3px #b3b3b3 inset,
+                            0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                            0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                            0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+                          color: rgba(var(--white), 1) !important;
+
+                          &::placeholder {
+                            color: rgba(var(--white), 0.7);
+                          }
+                        }
+
+                        svg {
+                          stroke: rgba(var(--white), 1);
+
+                          &.clear-search {
+                            fill: rgba(var(--white), 1) !important;
+                            stroke: none !important;
+                          }
+                        }
+                      }
+
+                      button {
+                        background: rgba(var(--darkest-color), 1);
+                        backdrop-filter: blur(36px);
+                        box-shadow:
+                          0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                          0px 0px 1.5px -3px #b3b3b3 inset,
+                          0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                          0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                          0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+
+                        &:hover {
+                          background-color: unset !important;
+                        }
+                      }
+                    }
+
+                    .chat-list {
+                      .chat-item {
+                        .chat-text {
+                          .chat-name {
+                            color: rgba(var(--white), 1);
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .reminder-section {
+              .custom-reminder-section {
+                background-color: rgba(var(--darkest-color), 1);
+
+                .reminder-header {
+                  color: rgba(var(--white), 1);
+
+                  & ~ .reminder-item {
+                    .reminder-note {
+                      color: rgba(var(--white), 1);
+                    }
+
+                    .reminder-type,
+                    .reminder-time {
+                      color: rgba(var(--white), 60%);
+                    }
+                  }
+                }
+
+                .reminder-content {
+                  .reminder-text {
+                    h6 {
+                      color: rgba(var(--white), 1);
+                    }
+                  }
+                }
+
+                .reminder-action {
+                  border-color: rgba(var(--white), 0.2);
+                }
+
+                .upcoming-reminder {
+                  background-color: rgba(var(--darkest-color), 1);
+                }
+
+                .hide-completed-toggle {
+                  .toggle-text {
+                    color: rgba(var(--white), 1) !important;
+                  }
+                }
+
+                .completed-reminders-section {
+                  .reminder-item {
+                    border-color: rgba(var(--white), 0.2) !important;
+                    border-left: 3px solid rgba(var(--warning-color), 1) !important;
+
+                    .reminder-note,
+                    .reminder-time,
+                    .reminder-type {
+                      color: rgba(var(--white), 1) !important;
+                    }
+                  }
+                }
+              }
+
+              .create-reminder-container {
+                .create-reminder-content {
+                  .form-section {
+                    label {
+                      color: rgba(var(--white), 1);
+                    }
+
+                    .time-option {
+                      .time-unit {
+                        color: rgba(var(--white), 60%);
+                      }
+                    }
+
+                    .react-select__control {
+                      background-color: rgba(var(--darkest-color-3), 1) !important;
+                      border-color: rgba(var(--white), 0.12) !important;
+
+                      .react-select__placeholder {
+                        color: rgba(var(--white), 60%);
+
+                        .fw-medium {
+                          color: rgba(var(--white), 1) !important;
+                        }
+                      }
+                    }
+
+                    .react-select__indicator-separator {
+                      background-color: rgba(var(--white), 0.2);
+                    }
+
+                    input {
+                      background-color: rgba(var(--darkest-color-3), 1) !important;
+                      border-color: rgba(var(--white), 0.12) !important;
+                      color: rgba(var(--white), 1);
+
+                      &::placeholder {
+                        color: rgba(var(--white), 60%);
+                      }
+                    }
+
+                    .time-options-grid {
+                      .time-option {
+                        /*  */
+                        border-color: rgba(var(--white), 0.2);
+                        background-color: rgba(var(--darkest-color-3), 1);
+
+                        &.selected {
+                          border-color: rgba(var(--primary-color), 1);
+
+                          .time-value {
+                            color: rgba(var(--primary-color), 1);
+                          }
+                        }
+
+                        .time-value {
+                          color: rgba(var(--white), 1);
+                        }
+                      }
+                    }
+
+                    .custom-time-toggle {
+                      span {
+                        color: rgba(var(--white), 1);
+                      }
+
+                      svg {
+                        stroke: rgba(var(--white), 1);
+                      }
+                    }
+                  }
+                }
+              }
+
+              .custom-reminder-calendar {
+                background-color: rgba(var(--darkest-color-3), 1);
+
+                .react-datepicker__header {
+                  background-color: rgba(var(--darkest-color), 1);
+
+                  .react-datepicker__current-month {
+                    color: rgba(var(--white), 1);
+                  }
+                }
+
+                .react-datepicker__month-select,
+                .react-datepicker__year-select {
+                  background-color: rgba(var(--primary-color), 1);
+                  color: rgba(var(--white), 1);
+                }
+
+                .react-datepicker__day-name {
+                  color: rgba(var(--white), 1);
+                }
+
+                .react-datepicker__day {
+                  color: rgba(var(--white), 1) !important;
+                }
+
+                .react-datepicker__day--outside-month {
+                  color: rgba(var(--white), 50%) !important;
+                }
+              }
+
+              .react-select__menu-list {
+                background-color: rgba(var(--darkest-color), 1);
+              }
+
+              .react-select__single-value {
+                color: rgba(var(--white), 60%);
+
+                .fw-medium {
+                  color: rgba(var(--white), 1) !important;
+                }
+
+                span {
+                  color: rgba(var(--white), 1) !important;
+                }
+              }
+            }
+
+            .files-accordion-container {
+              .files-accordion-section {
+                .files-accordion-header {
+                  background-color: rgba(var(--darkest-color), 1);
+
+                  .accordion-header-left {
+                    svg {
+                      fill: rgba(var(--white), 1);
+                      stroke: none;
+                    }
+
+                    span {
+                      color: rgba(var(--white), 1);
+                    }
+                  }
+
+                  .accordion-header-right {
+                    .chevron-icon {
+                      fill: rgba(var(--white), 1);
+                    }
+                  }
+                }
+
+                .files-accordion-content {
+                  background-color: rgba(var(--darkest-color-3), 1);
+                  border-color: rgba(var(--white), 0.12);
+
+                  .files-grid {
+                    .file-grid-item {
+                      border-color: rgba(var(--white), 0.12);
+
+                      .file-preview {
+                        background-color: rgba(var(--darkest-color), 1);
+                      }
+
+                      .files-details {
+                        background-color: rgba(var(--darkest-color), 1);
+                        border-color: rgba(var(--white), 0.12);
+
+                        .file-info {
+                          .file-name {
+                            color: rgba(var(--white), 1);
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .header-search {
+          &::after {
+            background-color: rgba(var(--white), 17%);
+          }
+        }
+      }
+    }
+
+    .files-empty-state {
+      p {
+        color: rgba(var(--white), 0.6);
+      }
+    }
+
+    .files-details {
+      .download-icon-svg {
+        background-color: #1d2130 !important;
+        border: 1px solid rgba(var(--white), 0.12);
+
+        .download-icon {
+          fill: rgba(var(--white), 0.8);
+        }
+      }
+
+      .file-info {
+        .file-date {
+          color: rgba(var(--white), 0.6);
+        }
+      }
+    }
+
+    .file-icon-container {
+      .file-icon-emoji {
+        .chat-icon {
+          fill: rgba(var(--white), 1);
+        }
+      }
+    }
+
+    .file-thumbnail-generic {
+      .file-icon {
+        .chat-icon {
+          fill: rgba(var(--white), 0.72);
+        }
+      }
+    }
+
+    .react-datepicker__month--selecting-range
+      .react-datepicker__day--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+      ),
+    .react-datepicker__year--selecting-range
+      .react-datepicker__day--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+      ),
+    .react-datepicker__month--selecting-range
+      .react-datepicker__month-text--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+      ),
+    .react-datepicker__year--selecting-range
+      .react-datepicker__month-text--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+      ),
+    .react-datepicker__month--selecting-range
+      .react-datepicker__quarter-text--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+      ),
+    .react-datepicker__year--selecting-range
+      .react-datepicker__quarter-text--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+      ),
+    .react-datepicker__month--selecting-range
+      .react-datepicker__year-text--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+      ),
+    .react-datepicker__year--selecting-range
+      .react-datepicker__year-text--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+      ) {
+      background-color: rgba(var(--primary-color), 1);
+    }
+
+    .reminder-section {
+      .custom-reminder-section {
+        .reminder-item {
+          background-color: rgba(var(--darkest-color), 1) !important;
+        }
+      }
+    }
+
+    .load-more-container {
+      .loader {
+        border-color: rgba(188, 188, 188, 0.2);
+        border-bottom-color: rgba(var(--primary-color), 1);
+      }
+    }
+
+    .search-modal-container {
+      .modal-content {
+        .modal-body {
+          .search-modal {
+            .react-select__control {
+              .css-1u9des2-indicatorSeparator {
+                background-color: rgba(var(--white), 0.12) !important;
+              }
+            }
+
+            .react-datepicker-popper[data-placement^='bottom'] {
+              .react-datepicker__triangle {
+                fill: rgba(var(--darkest-color), 1);
+                border-color: rgba(var(--darkest-color), 1) !important;
+                stroke: rgba(var(--darkest-color), 1) !important;
+              }
+            }
+
+            .react-datepicker__month {
+              .react-datepicker__day {
+                color: rgba(var(--white), 1);
+              }
+
+              .react-datepicker__day--weekend {
+                color: rgba(var(--danger-color), 1);
+              }
+
+              .react-datepicker__day--disabled {
+                color: rgba(var(--light-gray-color), 1);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .react-datepicker-popper[data-placement^='bottom'] {
+      .react-datepicker__triangle {
+        fill: rgba(var(--darkest-color), 1) !important;
+        color: rgba(var(--white), 18%) !important;
+      }
+    }
+
+    .modal-dialog {
+      &.custom-channel {
+        .modal-content {
+          input {
+            background: rgba(var(--darkest-color), 1);
+            border: unset;
+            border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%) 1;
+            backdrop-filter: blur(36px);
+            box-shadow:
+              0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+              0px 0px 1.5px -3px #b3b3b3 inset,
+              0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+              0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+              0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+          }
+
+          .modal-header {
+            border-color: rgba(var(--white), 0.2) !important;
+
+            .modal-title {
+              .modal-title-container {
+                .modal-title {
+                  color: rgba(var(--white), 1);
+                }
+              }
+
+              .btn-close {
+                filter: invert !important;
+              }
+            }
+          }
+
+          .modal-body {
+            .search-modal {
+              label {
+                color: rgba(var(--white), 1);
+              }
+
+              label {
+                color: rgba(var(--white), 1);
+              }
+
+              .phone-input .react-select__menu .react-select__menu-list {
+                background-color: rgba(var(--darkest-color), 1);
+              }
+
+              .react-datepicker-wrapper {
+                .react-datepicker__input-container {
+                  input {
+                    background-color: rgba(var(--darkest-color), 1);
+                    color: rgba(var(--white), 1);
+                    border-color: transparent;
+                    box-shadow: none;
+
+                    &::placeholder {
+                      color: rgba(var(--white), 0.7);
+                    }
+                  }
+                }
+              }
+
+              .react-select__control {
+                background-color: rgba(var(--darkest-color), 1) !important;
+                color: rgba(var(--white), 1);
+                border-color: transparent !important;
+                box-shadow: none !important;
+
+                .react-select__placeholder {
+                  color: rgba(var(--white), 1);
+                }
+              }
+
+              .react-select__menu {
+                .react-select__menu-list {
+                  background-color: rgba(var(--darkest-color), 1) !important;
+
+                  .react-select__option {
+                    span {
+                      color: rgba(var(--white), 1);
+                    }
+                  }
+                }
+              }
+
+              .search-input-section {
+                .search-box {
+                  input {
+                    background-color: rgba(var(--darkest-color), 1);
+                  }
+                }
+
+                button {
+                  padding: calc(7px + 2 * (100vw - 320px) / 1600) calc(8px + 2 * (100vw - 320px) / 1600);
+                }
+              }
+
+              .react-datepicker__month-container {
+                background-color: rgba(var(--darkest-color), 1);
+
+                .react-datepicker__header {
+                  background-color: rgba(var(--darkest-color), 1);
+                  border-color: rgba(var(--white), 0.2);
+
+                  .react-datepicker__current-month {
+                    color: rgba(var(--white), 1);
+                  }
+                }
+
+                .react-datepicker__day-names {
+                  background-color: rgba(var(--darkest-color), 1);
+
+                  .react-datepicker__day-name {
+                    span {
+                      color: rgba(var(--white), 1);
+                    }
+                  }
+                }
+              }
+
+              .react-datepicker__navigation {
+                .react-datepicker__navigation-icon {
+                  &::before {
+                    border-color: rgba(var(--white), 1);
+                  }
+                }
+              }
+
+              .react-datepicker {
+                border-color: rgb(0 0 0 / 74%);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .react-select__option {
+      span {
+        color: rgba(var(--white), 1) !important;
+      }
+    }
+
+    .modal {
+      .modal-dialog {
+        .modal-content {
+          background-color: rgba(var(--darkest-color-3), 1);
+          box-shadow: 0px 4px 40px rgba(var(--primary-color), 0.1);
+
+          .text-muted {
+            color: rgba(var(--white), 80%) !important;
+          }
+
+          .password-wrap {
+            svg {
+              &.icon-eye {
+                stroke: rgba(var(--white), 1) !important;
+              }
+            }
+          }
+
+          .react-select__control {
+            box-shadow: unset !important;
+            border-color: rgba(var(--white), 0.2) !important;
+          }
+
+          .react-select__option {
+            background-color: rgba(var(--darkest-color), 1);
+            color: rgba(var(--white), 1);
+
+            span {
+              color: rgba(var(--white), 1) !important;
+            }
+          }
+
+          textarea {
+            background: rgba(var(--darkest-color), 1);
+            border-color: transparent;
+
+            &::placeholder {
+              color: rgba(var(--white), 0.7) !important;
+            }
+          }
+
+          .phone-input {
+            input {
+              box-shadow: unset !important;
+              backdrop-filter: unset !important;
+            }
+          }
+
+          .modal-header {
+            border-color: rgba(var(--white), 0.12) !important;
+
+            .modal-title {
+              color: rgba(var(--white), 1);
+            }
+
+            button {
+              &.btn-close {
+                filter: invert(1);
+              }
+            }
+
+            .modal-title-container {
+              .modal-subtitle {
+                color: rgba(var(--white), 60%) !important;
+              }
+            }
+          }
+
+          .modal-body {
+            .custom-channel-details {
+              .tab-section {
+                .tabs-wrapper {
+                  ul {
+                    li {
+                      a {
+                        color: rgba(var(--white), 1);
+
+                        &.active {
+                          color: rgba(var(--primary-color), 1);
+                        }
+
+                        span {
+                          background-color: rgba(var(--primary-color), 1) !important;
+                          color: rgba(var(--white), 1) !important;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              .tab-content {
+                .about-section {
+                  .section-item {
+                    textarea {
+                      background-color: rgba(var(--darkest-color), 1);
+                      color: rgba(var(--white), 1);
+                    }
+                  }
+
+                  .section-item-created-by {
+                    background-color: rgba(var(--darkest-color), 1);
+
+                    .danger-zone {
+                      background-color: rgba(var(--darkest-color-3), 1) !important;
+                      border-color: rgba(var(--white), 0.2);
+
+                      .text-muted {
+                        color: rgba(var(--white), 1) !important;
+                      }
+                    }
+
+                    .section-label {
+                      color: rgba(var(--white), 1) !important;
+                    }
+
+                    p {
+                      color: rgba(var(--white), 0.72) !important;
+                    }
+                  }
+                }
+
+                .members-list {
+                  .member-item {
+                    .chat-item {
+                      .chat-text {
+                        color: rgba(var(--white), 1);
+                      }
+                    }
+
+                    .member-actions {
+                      svg {
+                        fill: rgba(var(--white), 1);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            ul {
+              li {
+                color: rgba(var(--white), 1) !important;
+                border-color: rgba(var(--white), 0.2);
+              }
+            }
+
+            label {
+              color: rgba(var(--white), 1);
+            }
+
+            input {
+              background-color: rgba(var(--darkest-color), 1);
+              border-color: rgba(var(--white), 0.12);
+              color: rgba(var(--white), 1) !important;
+
+              &::placeholder {
+                color: rgba(var(--white), 0.7);
+              }
+            }
+
+            .margin-b-25 {
+              h4 {
+                color: rgba(var(--white), 1);
+              }
+
+              span {
+                color: rgba(var(--white), 60%);
+              }
+            }
+          }
+
+          .custom-acknowledgement-modal {
+            .sub-title {
+              color: rgba(var(--white), 1);
+            }
+
+            ul {
+              li {
+                .warning {
+                  svg {
+                    fill: rgba(var(--danger-color), 1);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .edit-profile-modal {
+        .modal-content {
+          .modal-body {
+            ul {
+              li {
+                a {
+                  background-color: rgba(var(--darkest-color), 1);
+                  border-color: rgba(var(--white), 0.2);
+                  color: rgba(var(--white), 1);
+
+                  &.active {
+                    background-color: rgba(var(--primary-color), 1);
+                  }
+
+                  svg {
+                    stroke: rgba(var(--white), 1);
+                  }
+                }
+              }
+            }
+
+            .account-section {
+              .account-info {
+                background-color: rgba(var(--darkest-color), 1);
+                border: unset;
+                border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%) 1;
+                backdrop-filter: blur(36px);
+                box-shadow:
+                  0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                  0px 0px 1.5px -3px #b3b3b3 inset,
+                  0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                  0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                  0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+
+                small {
+                  color: rgba(var(--white), 0.72) !important;
+                }
+
+                p {
+                  color: rgba(var(--white), 1) !important;
+                }
+              }
+            }
+
+            .profile-avatar-section {
+              .phone-input {
+                .react-select__control {
+                  background-color: rgba(var(--darkest-color), 1) !important;
+                  border: unset;
+                  border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%) 1;
+                  backdrop-filter: blur(36px);
+                  box-shadow:
+                    0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                    0px 0px 1.5px -3px #b3b3b3 inset,
+                    0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                    0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                    0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset !important;
+                }
+              }
+            }
+          }
+        }
+
+        &.custom-form-modal-input {
+          .other-details-tab {
+            .react-select__control {
+              background-color: rgba(var(--darkest-color), 1) !important;
+              border-color: rgba(var(--white), 0.12);
+              color: rgba(var(--white), 1) !important;
+              border: unset;
+              border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%) 1;
+              backdrop-filter: blur(36px);
+              box-shadow:
+                0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+                0px 0px 1.5px -3px #b3b3b3 inset,
+                0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+                0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+                0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset !important;
+
+              .react-select__input {
+                box-shadow: none;
+                backdrop-filter: none;
+              }
+            }
+          }
+        }
+      }
+
+      .calender-modal {
+        .custom-calendar {
+          .react-datepicker__header {
+            border-color: rgba(var(--white), 0.12);
+
+            .react-datepicker__current-month {
+              color: rgba(var(--white), 1);
+            }
+
+            .react-datepicker__header__dropdown {
+              .react-datepicker__year-dropdown-container,
+              .react-datepicker__month-dropdown-container {
+                .react-datepicker__year-select,
+                .react-datepicker__month-select {
+                  background-color: rgba(var(--darkest-color), 1);
+                  border-color: rgba(var(--white), 0.2) !important;
+                  color: rgba(var(--white), 1);
+                  background-image: url('../public/assets/svg/down-arrow-light.svg');
+                }
+              }
+            }
+          }
+
+          .react-datepicker__month-container {
+            .react-datepicker__day-names {
+              .react-datepicker__day-name {
+                background-color: rgba(var(--darkest-color), 1);
+                color: rgba(var(--white), 1);
+              }
+            }
+          }
+
+          .react-datepicker__month {
+            .react-datepicker__day {
+              color: rgba(var(--light-gray-color), 1);
+            }
+
+            .react-datepicker__day--disabled {
+              color: rgba(var(--text-color), 1);
+            }
+
+            .react-datepicker__day--weekend {
+              color: rgba(var(--danger-color), 1);
+            }
+          }
+
+          .react-datepicker__navigation {
+            .react-datepicker__navigation-icon {
+              &::before {
+                border-color: rgba(var(--white), 1);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .read-message-title {
+      color: rgba(var(--white), 1);
+    }
+
+    .read-by-message {
+      color: rgba(var(--white), 80%);
+    }
+
+    .react-select__menu-notice--no-options {
+      background-color: rgba(var(--darkest-color), 1);
+      color: rgba(var(--white), 1) !important;
+    }
+
+    .react-select__multi-value {
+      background-color: rgba(var(--darkest-color), 1) !important;
+
+      .react-select__multi-value__label {
+        .fw-medium {
+          color: rgba(var(--white), 1) !important;
+        }
+      }
+
+      .react-select__multi-value__remove {
+        svg {
+          fill: rgba(var(--white), 1);
+        }
+      }
+    }
+
+    .phone-input .react-select__control {
+      border-color: rgba(var(--white), 0.2) !important;
+      background-color: rgba(var(--darkest-color), 1) !important;
+
+      .react-select__single-value {
+        span {
+          color: rgba(var(--white), 1) !important;
+        }
+      }
+    }
+
+    .call-message {
+      &.missed-call,
+      &.answered-call,
+      &.joinable-call,
+      &.ongoing-call,
+      &.calling-status {
+        background-color: rgba(var(--darkest-color), 1);
+
+        .call-message-content {
+          .call-details {
+            .call-type {
+              color: rgba(var(--white), 1) !important;
+            }
+
+            .call-status {
+              color: rgba(var(--white), 1) !important;
+            }
+          }
+        }
+      }
+
+      &.calling-status {
+        border-color: rgba(var(--white), 0.3);
+
+        .call-icon-wrapper {
+          background-color: rgba(var(--white), 0.3);
+
+          svg {
+            stroke: rgba(var(--white), 1);
+            fill: none;
+          }
+        }
+      }
+
+      &.ongoing-call {
+        border-color: rgba(var(--gray-medium), 1);
+
+        .call-icon-wrapper {
+          background-color: rgba(var(--gray-medium), 1);
+
+          svg {
+            stroke: rgba(var(--white), 1);
+            fill: none;
+          }
+        }
+      }
+
+      &.answered-call {
+        .call-icon-wrapper {
+          background-color: rgba(var(--success-color), 1);
+        }
+      }
+    }
+
+    .audio-recorder-interface {
+      background-color: rgba(var(--darkest-color), 1);
+
+      .audio-cancel-btn {
+        background-color: rgba(var(--darkest-color-3), 1);
+        border-color: rgba(var(--white), 0.2);
+        color: rgba(var(--white), 1);
+      }
+    }
+
+    .call-notification-overlay {
+      .call-notification-toast {
+        background: linear-gradient(rgb(29, 29, 29), #1d1d1d, rgba(255, 255, 255, 0));
+        border: unset;
+        border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%) 1;
+        backdrop-filter: blur(36px);
+        box-shadow:
+          0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+          0px 0px 1.5px -3px #b3b3b3 inset,
+          0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+          0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+          0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+
+        .toast-body {
+          .call-details {
+            h6 {
+              color: rgba(var(--white), 1) !important;
+            }
+
+            .call-description {
+              color: rgba(var(--white), 0.72);
+            }
+          }
+        }
+      }
+    }
+
+    .react-select__control {
+      .react-select__value-container {
+        .react-select__single-value {
+          .fw-medium {
+            color: rgba(var(--white), 1) !important;
+          }
+
+          .text-muted {
+            color: rgba(var(--white), 1) !important;
+          }
+
+          &.css-1dimb5e-singleValue {
+            color: rgba(var(--white), 1) !important;
+          }
+        }
+      }
+    }
+
+    .popover-container {
+      .flex {
+        &.flex-column {
+          background: linear-gradient(rgb(29, 29, 29), #1d1d1d, rgba(255, 255, 255, 0));
+          border: unset;
+          border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 30%) 1;
+          backdrop-filter: blur(36px);
+          box-shadow:
+            0 0 30px rgba(242, 242, 242, 0.1019607843) inset,
+            0px 0px 1.5px -3px #b3b3b3 inset,
+            0px 0px 1.5px -3px rgba(179, 179, 179, 0.2) inset,
+            0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset,
+            0px 0px 1.5px -5.25px rgba(255, 255, 255, 0.5019607843) inset;
+        }
+      }
+    }
+
+    .favmsg {
+      .react-select__control {
+        background-color: rgba(var(--darkest-color), 1) !important;
+        border-color: rgba(var(--white), 0.2) !important;
+
+        &.react-select__control--menu-is-open,
+        &.react-select__control--is-focused {
+          box-shadow: unset !important;
+        }
+      }
+
+      .react-select__menu-list {
+        background-color: rgba(var(--darkest-color), 1) !important;
+        color: rgba(var(--white), 1) !important;
+      }
+
+      .fw-medium {
+        background-color: rgba(var(--darkest-color), 1) !important;
+        color: rgba(var(--white), 1) !important;
+
+        .message-content {
+          p {
+            color: rgba(var(--white), 1) !important;
+          }
+
+          color: rgba(var(--white), 1);
+        }
+      }
+
+      P {
+        &.text-muted {
+          color: rgba(var(--white), 1) !important;
+        }
+      }
+    }
+
+    .pin-message {
+      .react-select__control {
+        background-color: rgba(var(--darkest-color), 1) !important;
+        border-color: rgba(var(--white), 0.2) !important;
+
+        &.react-select__control--menu-is-open,
+        &.react-select__control--is-focused {
+          box-shadow: unset !important;
+        }
+      }
+
+      .react-select__menu-list {
+        background-color: rgba(var(--darkest-color), 1) !important;
+        color: rgba(var(--white), 1) !important;
+      }
+
+      .fw-medium {
+        background-color: rgba(var(--darkest-color), 1) !important;
+        color: rgba(var(--white), 1) !important;
+
+        .message-content {
+          p {
+            color: rgba(var(--white), 1) !important;
+          }
+
+          color: rgba(var(--white), 1);
+        }
+      }
+
+      P {
+        &.text-muted {
+          color: rgba(var(--white), 1) !important;
+        }
+      }
+
+      > .fw-medium {
+        .pin-aligns {
+          .time-aligns {
+            .chat-time {
+              color: rgba(var(--time-text-color), 0.8);
+            }
+          }
+        }
+      }
+    }
+
+    .main-navigation.on {
+      background-color: rgba(var(--darkest-color), 1) !important;
+    }
+
+    .typing-indicator {
+      background-color: rgba(var(--darkest-color-3), 1) !important;
+    }
+
+    .main-page {
+      .messenger-box {
+        .messenger-left-sidebar {
+          .recent-default {
+            .user-profile-header {
+              .user-info {
+                .text-group {
+                  .name {
+                    .dropdown-icon {
+                      stroke: rgba(var(--white), 1);
+                    }
+                  }
+
+                  .team-dropdown {
+                    background-color: rgba(var(--darkest-color), 1);
+
+                    .my-profile {
+                      border-color: rgba(var(--white), 0.12);
+                    }
+
+                    .team-divider {
+                      color: rgba(var(--white), 1);
+                    }
+
+                    .team-data {
+                      .team-des {
+                        .user-data {
+                          h5 {
+                            color: rgba(var(--white), 1);
+                          }
+
+                          .divider-text {
+                            color: rgba(var(--white), 50%);
+                          }
+                        }
+
+                        svg {
+                          &.log-out {
+                            fill: rgba(var(--white), 1);
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .react-select__indicator-separator {
+      background-color: rgba(var(--white), 0.2);
+    }
+
+    .profile-section {
+      .profile-avatar-section {
+        .avatar-upload-container {
+          .profile-avatar {
+            .profile-placeholder {
+              background-color: rgba(var(--darkest-color), 1);
+              color: rgba(var(--white), 1);
+              border-color: rgba(var(--white), 0.2);
+            }
+          }
+
+          .avatar-upload-btn {
+            background-color: rgba(var(--darkest-color), 1);
+
+            svg {
+              stroke: rgba(var(--white), 1);
+              fill: none;
+            }
+          }
+        }
+      }
+    }
+
+    .Toastify__toast--error {
+      background-color: rgba(var(--darkest-color), 1);
+
+      .Toastify__close-button {
+        > svg {
+          fill: rgba(var(--white), 1);
+        }
+      }
+    }
+
+    .search-results-section {
+      border-color: rgba(var(--white), 0.12);
+
+      h4 {
+        color: rgba(var(--white), 1);
+      }
+    }
+
+    .message-result {
+      background-color: rgba(var(--darkest-color), 1);
+      border-color: rgba(var(--white), 0.2);
+      color: rgba(var(--white), 1);
+
+      .message-header {
+        .sender-name {
+          color: rgba(var(--white), 1) !important;
+        }
+
+        .message-time {
+          color: rgba(var(--white), 60%) !important;
+        }
+      }
+    }
+
+    //  Admin-dark-scss
+    .page-wrapper.compact-wrapper {
+      .page-body-wrapper {
+        background-color: transparent !important;
+
+        div.sidebar-wrapper {
+          background-color: rgba(var(--darkest-color), 1);
+
+          .sidebar-main {
+            .sidebar-links {
+              li {
+                &.sidebar-main-title {
+                  h6 {
+                    color: rgba(var(--white), 1) !important;
+                  }
+                }
+
+                &.sidebar-list {
+                  a {
+                    span {
+                      color: rgba(var(--white), 1) !important;
+                    }
+
+                    svg {
+                      stroke: rgba(var(--white), 1) !important;
+                    }
+                  }
+
+                  &.active,
+                  &:hover {
+                    svg {
+                      stroke: rgba(var(--primary-color), 1) !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .logo-wrapper {
+          border-color: rgba(var(--white), 0.12) !important;
+
+          .toggle-sidebar {
+            .sidebar-toggle {
+              background-color: rgba(236, 243, 250, 0.09) !important;
+
+              svg {
+                stroke: rgba(var(--white), 1) !important;
+              }
+            }
+          }
+
+          a {
+            &.text-decoration-none {
+              h2 {
+                &.text-light {
+                  color: rgba(var(--white), 1) !important;
+                }
+              }
+            }
+          }
+        }
+
+        .footer {
+          background-color: rgba(var(--darkest-color), 1);
+          color: rgba(var(--white), 1) !important;
+        }
+      }
+
+      .page-header {
+        background-color: rgba(var(--darkest-color), 1);
+
+        .nav-right {
+          .nav-menus {
+            .nav-menu-li {
+              background-color: rgba(var(--darkest-color-3), 1) !important;
+              border-color: rgba(var(--white), 0.12) !important;
+
+              svg {
+                stroke: rgba(var(--white), 1) !important;
+                fill: none;
+
+                &.for-light {
+                  fill: rgba(var(--white), 1) !important;
+                  stroke: none;
+                }
+              }
+            }
+
+            .profile-nav {
+              .profile-media {
+                .user-info {
+                  background-color: rgba(var(--darkest-color-3), 1);
+                  color: rgba(var(--white), 1) !important;
+
+                  span {
+                    color: rgba(var(--white), 1);
+                  }
+                }
+
+                .user-data {
+                  color: rgba(var(--white), 1);
+                }
+              }
+
+              .profile-dropdown {
+                background-color: rgba(var(--darkest-color), 1) !important;
+
+                ul {
+                  li {
+                    border-color: rgba(var(--white), 0.2);
+
+                    a {
+                      color: rgba(var(--white), 1);
+                    }
+
+                    .profile-icon {
+                      svg {
+                        stroke: rgba(var(--white), 1);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .page-body {
+        background-color: rgba(var(--darkest-color-3), 1);
+
+        .card {
+          background-color: rgba(var(--darkest-color), 1);
+
+          .card-header {
+            background-color: rgba(var(--darkest-color), 1);
+            color: rgba(var(--white), 1) !important;
+
+            &::before {
+              background-color: rgba(var(--white), 0.2);
+            }
+
+            span {
+              color: rgba(var(--white), 60%);
+            }
+          }
+
+          .card-body {
+            .profile-bg {
+              .user-image {
+                background-color: rgba(var(--primary-color), 0.5);
+
+                .avatar {
+                  img {
+                    border-color: rgba(var(--white), 0.12) !important;
+                  }
+
+                  .profile-placeholder {
+                    background-color: rgba(var(--darkest-color-3), 1);
+                    border-color: rgba(var(--white), 0.2) !important;
+
+                    span {
+                      color: rgba(var(--white), 1);
+                    }
+                  }
+
+                  .icon-wrapper {
+                    background-color: rgba(var(--darkest-color-3), 1);
+                  }
+                }
+              }
+
+              .profile-data {
+                .container {
+                  .profile-title {
+                    color: rgba(var(--white), 1) !important;
+                  }
+
+                  p {
+                    span {
+                      color: rgba(var(--white), 60%);
+                    }
+                  }
+                }
+              }
+            }
+
+            .login-form {
+              .login-input {
+                .form-icon {
+                  stroke: rgba(var(--white), 1) !important;
+                }
+              }
+
+              .form-group,
+              .text-start {
+                label {
+                  color: rgba(var(--white), 1);
+                }
+
+                input {
+                  background-color: rgba(var(--darkest-color-3), 1);
+                  border-color: rgba(var(--white), 0.12);
+                  color: rgba(var(--white), 1) !important;
+
+                  &::placeholder {
+                    color: rgba(var(--white), 0.7) !important;
+                  }
+                }
+
+                .form-icon {
+                  stroke: rgba(var(--white), 1) !important;
+                }
+
+                .phone-input {
+                  .react-select__control {
+                    background-color: rgba(var(--darkest-color-3), 1) !important;
+                    border-color: rgba(var(--white), 0.12) !important;
+                  }
+
+                  .react-select__menu {
+                    .react-select__menu-list {
+                      background-color: rgba(var(--darkest-color-3), 1) !important;
+                    }
+                  }
+
+                  .react-select__indicator-separator {
+                    background-color: rgba(var(--white), 0.12) !important;
+                  }
+                }
+              }
+
+              &.vertical-tabs {
+                .accordion {
+                  .accordion-item {
+                    background-color: rgba(var(--darkest-color-3), 1);
+                    border-color: rgba(var(--white), 0.12);
+
+                    .accordion-header {
+                      button {
+                        background-color: rgba(var(--darkest-color), 1);
+                        color: rgba(var(--white), 1) !important;
+                      }
+                    }
+                  }
+
+                  .accordion-button:not(.collapsed) {
+                    color: rgba(var(--primary-color), 1) !important;
+                  }
+                }
+              }
+
+              &.custom-field {
+                label {
+                  color: rgba(var(--white), 1) !important;
+
+                  .form-check {
+                    label {
+                      color: rgba(var(--white), 1) !important;
+                    }
+                  }
+                }
+
+                .custom-tag-values {
+                  border-color: rgba(var(--white), 0.2) !important;
+                  background-color: rgba(var(--darkest-color-3), 1) !important;
+
+                  .custom-tag-input {
+                    background-color: rgba(var(--darkest-color), 1) !important;
+                    border-color: rgba(var(--white), 0.2);
+
+                    .tag {
+                      background-color: rgba(var(--darkest-color-3), 1);
+                      color: rgba(var(--white), 1);
+
+                      button {
+                        color: rgba(var(--white), 1);
+                      }
+                    }
+                  }
+                }
+
+                .form-group {
+                  .custom-input {
+                    background-color: rgba(var(--darkest-color), 1);
+
+                    .react-select__control {
+                      border-color: rgba(var(--white), 0.2) !important;
+                      box-shadow: unset !important;
+                    }
+
+                    .react-select__option {
+                      background-color: rgba(var(--darkest-color), 1);
+                      color: rgba(var(--white), 1);
+                    }
+                  }
+                }
+
+                .position-relative {
+                  .custom-input {
+                    background-color: rgba(var(--darkest-color-3), 1);
+                  }
+                }
+              }
+            }
+
+            .accordion {
+              .custom-item-according {
+                .accordion-collapse {
+                  .accordion-body {
+                    background-color: rgba(var(--darkest-color), 1);
+
+                    .login-form {
+                      .login-input {
+                        label {
+                          color: rgba(var(--white), 1) !important;
+                        }
+                      }
+                    }
+                  }
+
+                  .accordion-item {
+                    h2 {
+                      button {
+                        box-shadow: unset !important;
+                      }
+                    }
+                  }
+                }
+
+                .custom-tag-input {
+                  background-color: rgba(var(--darkest-color-3), 1);
+                }
+              }
+
+              .accordion-button:not(.collapsed) {
+                box-shadow: unset !important;
+              }
+
+              .react-select__control {
+                border-color: rgba(var(--white), 0.12) !important;
+                background-color: rgba(var(--darkest-color), 1) !important;
+              }
+
+              .custom-tag-input {
+                background-color: rgba(var(--darkest-color), 1);
+                border-color: rgba(var(--white), 0.2);
+
+                .tag {
+                  color: rgba(var(--white), 1);
+                  background-color: rgba(var(--darkest-color), 1);
+
+                  button {
+                    color: rgba(var(--white), 1);
+                  }
+                }
+              }
+            }
+
+            .team-group {
+              .team-data {
+                &::before {
+                  background-color: rgba(var(--white), 0.12);
+                }
+
+                .team-des {
+                  .user-info {
+                    background-color: rgba(var(--darkest-color-3), 1);
+
+                    span {
+                      color: rgba(var(--white), 1);
+                    }
+                  }
+
+                  .user-data {
+                    h5 {
+                      color: rgba(var(--white), 1) !important;
+                    }
+
+                    .divider-text {
+                      color: rgba(var(--white), 60%) !important;
+                    }
+                  }
+                }
+              }
+            }
+
+            .tab-section {
+              .tabs-wrapper {
+                ul {
+                  li {
+                    a {
+                      color: rgba(var(--white), 1);
+
+                      &.active {
+                        color: rgba(var(--primary-color), 1);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .custom-selection-box {
+              .table-controls-left {
+                .selection-box {
+                  label {
+                    color: rgba(var(--white), 1);
+                  }
+
+                  .dropdown {
+                    .form-control {
+                      border-color: rgba(var(--white), 60%) !important;
+
+                      span {
+                        color: rgba(var(--white), 1);
+                      }
+
+                      svg {
+                        fill: rgba(var(--white), 1) !important;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .common-table {
+              border-color: rgba(var(--white), 0.2);
+
+              .table {
+                thead {
+                  tr {
+                    background-color: rgba(var(--darkest-color-3), 1);
+
+                    th {
+                      background-color: rgba(var(--darkest-color-3), 1);
+                      color: rgba(var(--white), 1) !important;
+                      border-color: rgba(var(--white), 0.2);
+
+                      input{
+                        background-color: rgba(var(--darkest-color-3), 1);
+                      }
+
+                      span {
+                        color: rgba(var(--white), 1) !important;
+                      }
+
+                      .custom-checkbox {
+                        &::before {
+                          border-color: rgba(var(--white), 1) !important;
+                        }
+                      }
+
+                      .indicators-arrow {
+                        .filter-arrow-top,
+                        .filter-arrow-bottom {
+                          fill: rgba(var(--white), 1);
+                        }
+                      }
+                    }
+                  }
+                }
+
+                tbody {
+                  tr {
+                    .no-data-found {
+                      color: rgba(var(--white), 1) !important;
+                    }
+
+                    td {
+                      background-color: rgba(var(--darkest-color-3), 1) !important;
+                      border-color: rgba(var(--white), 0.12);
+                      color: rgba(var(--white), 1);
+
+                      span , h1, h2 , h3, h4, h5, h6 , small , p {
+                        color: rgba(var(--white), 1) !important;
+                      }
+
+                       input{
+                        background-color: rgba(var(--darkest-color-3), 1);
+                      }
+
+                      .custom-checkbox {
+                        &::before {
+                          border-color: rgba(var(--white), 1) !important;
+                        }
+                      }
+
+                      .user-placeholder {
+                        background-color: rgba(var(--darkest-color), 1);
+
+                        span {
+                          color: rgba(var(--white), 1);
+                        }
+                      }
+
+                      .user-data {
+                        h5 {
+                          color: rgba(var(--white), 1) !important;
+                        }
+                      }
+
+                      .custom-switch {
+                        .slider {
+                          background-color: rgba(var(--darkest-color), 1);
+                        }
+                      }
+
+                      span {
+                        color: rgba(var(--white), 0.5);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .pagination-footer-wrapper {
+              span {
+                color: rgba(var(--white), 1) !important;
+              }
+
+              .table-pagination {
+                .pagination {
+                  .page-item {
+                    button {
+                      background-color: rgba(var(--darkest-color-3), 1) !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .channel-actions {
+            svg {
+              fill: rgba(var(--white), 1) !important;
+            }
+          }
+        }
+
+        .accordion-button:not(.collapsed)::after {
+          filter: invert(1) !important;
+        }
+
+        .accordion-button.collapsed::after {
+          filter: invert(1) !important;
+        }
+      }
+    }
+
+    .deactivated {
+      color: rgba(var(--white), 1) !important;
+    }
+
+    .close-btn-icon {
+      fill: rgba(var(--white), 1) !important;
+    }
+
+    .create-reminder-content {
+      .form-section {
+        .close-btn-icon {
+          fill: rgba(var(--white), 1) !important;
+        }
+      }
+    }
+
+    .dashboard-admin {
+      .card {
+        &.widget {
+          background-blend-mode: color-burn;
+
+          .card-body {
+            .widget-content {
+              h4 {
+                color: rgba(var(--white), 1);
+              }
+
+              span {
+                &.f-light {
+                  color: rgba(var(--white), 60%);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .dropdown-menu {
+      background-color: rgba(var(--darkest-color-2), 1);
+
+      .dropdown-item {
+        color: rgba(var(--white), 1);
+
+        svg {
+          fill: rgba(var(--white), 1) !important;
+
+          &.copied-success {
+            fill: none !important;
+            stroke: rgba(var(--white), 1) !important;
+          }
+
+          &.delete {
+            fill: none !important;
+            stroke: rgba(var(--danger-color), 1) !important;
+          }
+
+          &.star-svg {
+            fill: rgba(var(--light-yellow-color), 1) !important;
+          }
+        }
+      }
+    }
+
+    .preferences-btn-box {
+      border-color: rgba(var(--white), 0.2);
+    }
+
+    .message-image,
+    .file-aligns,
+    .message-video,
+    .call-width {
+      .visible-chat-time {
+        color: rgba(var(--time-text-color), 0.8) !important;
+      }
+    }
+
+    .form-switch {
+      .form-check-input {
+        background-color: rgba(var(--darkest-color-3), 1);
+        border-color: rgba(var(--white), 0.2);
+
+        &:checked {
+          background-color: rgba(var(--primary-color), 1);
+        }
+      }
+    }
+
+    .Toastify__toast-container {
+      .Toastify__toast {
+        background-color: rgba(var(--darkest-color), 1);
+      }
+    }
+  }
+}

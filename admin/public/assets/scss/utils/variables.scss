@@ -1,0 +1,86 @@
+:root {
+  --bs-emphasis-color-rgb: #F4F4F4; // or your custom color
+  --data-table-icon-tb-hw: 20px;
+  --svg-stroke-color: 102, 102, 102;
+  --title-color: 51, 51, 51; //#333333
+
+  //dark variables
+  --darkest-color: 41, 46, 67; //#292E43 
+  --darkest-color-2: 33, 37, 54; //#212536
+  --darkest-color-3: 29, 33, 48; //#1D2130
+  --danger-color: 226, 54, 37; //#e23625
+  --white: 250, 250, 250; //#ffffff
+  --primary-color: 85, 121, 248; // #5579F8
+  --danger-color: 226, 54, 37; //#e23625
+
+  //dashboard-colors****
+
+  --success-d-color: 13, 175, 124; //#0DAF7C
+  --danger-d-color: 226, 54, 37; //#E23625
+}
+
+// Theme colors variables
+
+$primary-color: #5579f8;
+$secondary-color: #0894D9;
+$danger-color: #E23625;
+$success-color: #0DAF7C;
+$warning-color :#E98724;
+
+
+$white: #fff;
+$text-color: #666666;
+$input-border: #ccc;
+$input-bg: #f9f9f9;
+$title-color: #282828;
+$light-gray: #E2E2E2;
+$page-body-color: #F4F4F4;
+$search-input-color: #EEEEEE;
+$input-text-color: #7D7D7D;
+$light-color: $search-input-color;
+$light-bg-color: #E8E8E8;
+$input-border-color: #FAFAFA;
+$tab-border-color: #D6D6D6;
+$light-gray : #ecf3fa;
+$box-shadow: 0px 4px 40px rgba(0, 69, 103, 0.1);
+$dropdown-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+$icon-header-stroke: #292D32;
+$gray-light-color: #F3F3F3;
+
+// typography variables
+$heading_1: 30px;
+$heading_2: 28px;
+$heading_3: 24px;
+$heading_4: 22px;
+$heading_5: 20px;
+$heading_6: 18px;
+$common_letter_spacing: 0.5px;
+
+//fonts
+$dm-Sans-font : 'DM Sans',
+sans-serif;
+
+
+//Card settings
+$card-padding: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)))
+  calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+$card-border : 1px solid $light-gray;
+$card-border-radius :10px;
+
+
+//footer settings
+$footer_bg_color : $white;
+
+//Sidebar main menu setting
+$sidebar-compact-width: 253px;
+
+
+// svg setting
+$common-svg-width: 22px;
+$common-svg-height: 22px;
+
+//  toast
+$toastify-toast-min-height: 0px;
+$toastify-toast-padding: 10px 30px 10px 0px;
+
+// dark layout variables  

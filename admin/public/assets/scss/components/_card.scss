@@ -1,0 +1,207 @@
+/**=====================
+     Card CSS Start
+==========================**/
+
+@use '../utils/variables.scss';
+
+.card {
+  border: none;
+  border-radius: variables.$card-border-radius;
+  margin-bottom: 24px;
+  .card-header {
+    padding: variables.$card-padding;
+    background-color: variables.$white;
+    border-bottom: none;
+    position: relative;
+    &::before {
+      content: '';
+      background-color: variables.$light-gray;
+      width: calc(100% - 33px);
+      height: 1px;
+      position: absolute;
+      left: 17px;
+      bottom: 0px;
+    }
+    &.page-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    h4 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    span {
+      font-size: 16px;
+      font-weight: 400;
+      color: variables.$text-color;
+    }
+  }
+  .card-body {
+    padding: calc(14px + 6 * (100vw - 320px) / 1600) calc(20px + 5 * (100vw - 320px) / 1600);
+    .profile-bg {
+      // background-color: red;
+      .user-image {
+        border-radius: 5px;
+        background-color: rgba(var(--primary-color), 0.09);
+        position: relative;
+        .avatar {
+          height: calc(85px + (95 - 85) * ((100vw - 320px) / (1920 - 320)));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            height: calc(80px + (100 - 80) * ((100vw - 320px) / (1920 - 320)));
+            width: calc(80px + (100 - 80) * ((100vw - 320px) / (1920 - 320)));
+            border-radius: 50%;
+            max-height: 155px;
+            max-width: 155px;
+            border: 3px solid rgba(var(--white), 1);
+            position: absolute;
+            top: 38px;
+          }
+          .profile-placeholder {
+            height: calc(80px + (100 - 80) * ((100vw - 320px) / (1920 - 320)));
+            width: calc(80px + (100 - 80) * ((100vw - 320px) / (1920 - 320)));
+            border-radius: 50%;
+            position: absolute;
+            top: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid rgba(var(--white), 1);
+            background-color: #e8e8e8;
+          }
+          .user-img-upload {
+            .avatar-remove-btn {
+              position: absolute;
+              top: -5px;
+              left: 20px;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              background-color: rgba(variables.$danger-color, 1);
+              color: rgba(var(--white), 1);
+              border: none;
+              font-size: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              z-index: 10;
+            }
+          }
+          .icon-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: calc(92px + (95 - 92) * ((100vw - 320px) / (1920 - 320)));
+            background-color: #f9f9f9;
+            padding: 5px;
+            border-radius: 50px;
+            position: absolute;
+            left: 56%;
+            svg {
+              height: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
+              width: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
+              body.dark & {
+                fill: rgba(var(--white), 1);
+              }
+            }
+          }
+        }
+      }
+      .profile-data {
+        margin-top: calc(45px + (55 - 45) * ((100vw - 320px) / (1920 - 320)));
+        text-align: center;
+        .profile-title {
+          font-size: calc(20px + (22 - 20) * ((100vw - 320px) / (1920 - 320)));
+          margin-bottom: calc(2px + (9 - 2) * ((100vw - 320px) / (1920 - 320)));
+        }
+        .contact-details {
+          svg {
+            height: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+            width: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+          }
+          span {
+            font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1920 - 320)));
+          }
+        }
+      }
+    }
+  }
+  &.active-users-card {
+    .card-body {
+      .table-responsive {
+        table {
+          thead {
+            tr {
+              th {
+                &:nth-child(2) {
+                  min-width: 150px;
+                  max-width: 150px;
+                }
+                &:nth-child(4) {
+                  min-width: 180px;
+                  max-width: 180px;
+                }
+              }
+            }
+          }
+          tbody {
+            tr {
+              td {
+                vertical-align: middle;
+                &:nth-child(2) {
+                  min-width: 150px;
+                  max-width: 150px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.recent-teams-card {
+    .card-body {
+      .table-responsive {
+        table {
+          thead {
+            tr {
+              th {
+                &:nth-child(2) {
+                  min-width: 150px;
+                  max-width: 150px;
+                }
+                &:nth-child(4) {
+                  min-width: 180px;
+                  max-width: 180px;
+                }
+              }
+            }
+          }
+          tbody {
+            tr {
+              td {
+                vertical-align: middle;
+                p {
+                  margin-bottom: 0;
+                }
+                &:nth-child(2) {
+                  min-width: 150px;
+                  max-width: 150px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**=====================
+    2.10 Card CSS End
+==========================**/

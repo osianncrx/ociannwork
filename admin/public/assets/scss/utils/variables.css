@@ -1,0 +1,15 @@
+:root {
+  --bs-emphasis-color-rgb: #F4F4F4;
+  --data-table-icon-tb-hw: 20px;
+  --svg-stroke-color: 102, 102, 102;
+  --title-color: 51, 51, 51;
+  --darkest-color: 41, 46, 67;
+  --darkest-color-2: 33, 37, 54;
+  --darkest-color-3: 29, 33, 48;
+  --danger-color: 226, 54, 37;
+  --white: 250, 250, 250;
+  --primary-color: 85, 121, 248;
+  --danger-color: 226, 54, 37;
+  --success-d-color: 13, 175, 124;
+  --danger-d-color: 226, 54, 37;
+}/*# sourceMappingURL=variables.css.map */

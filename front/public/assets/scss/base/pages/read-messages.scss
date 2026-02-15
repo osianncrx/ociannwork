@@ -1,0 +1,29 @@
+/**=====================
+     Read Messages scss Start
+==========================**/
+@use "../variables.scss";
+
+.contact-chat-dis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: center;
+
+    .read-messages-dis {
+        height: 213px;
+        width: 213px;
+    }
+
+    .read-messages {
+        color: rgba(var(--title-color), 1);
+        font-size: 22px;
+        font-weight: 500;
+    }
+}
+
+
+/**=====================
+    Read Messages scss End
+==========================**/

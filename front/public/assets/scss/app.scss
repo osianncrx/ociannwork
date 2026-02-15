@@ -1,0 +1,44 @@
+// ********************** utils **********************
+@use 'sass:color';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import './style.scss';
+@import 'simplebar-react/dist/simplebar.min.css';
+@import 'react-datepicker/dist/react-datepicker.css';
+@import 'quill/dist/quill.snow.css';
+@import 'react-datepicker/dist/react-datepicker.css';
+
+
+// ********************** common **********************
+
+// ********************** pages **********************
+@import './base/pages/login.scss';
+@import './base/pages/messenger.scss';
+@import './base/typography';
+@import './base/reset';
+@import './base/pages/profile.scss';
+@import './base/pages/read-messages.scss';
+@import './base/dark.scss';
+
+// ********************** frontend **********************
+
+//	********************** admin **********************
+@import './admin/layout/footer_admin';
+@import './admin/layout/sidebar_admin';
+@import './admin/components/card_admin';
+@import './admin/base/reset_admin';
+@import './admin/components/tab_admin';
+@import 'quill-mention/dist/quill.mention.css';
+@import 'quill/dist/quill.snow.css';
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import './admin/base/dashboard_admin';
+@import 'apexcharts/dist/apexcharts.css';
+// .ck-editor__editable_inline {
+//     min-height: 80px;
+//     padding: 10px;
+//     font-size: 14px;
+//     background: #fff;
+//     border-radius: 4px;
+//     box-shadow: none;
+// }

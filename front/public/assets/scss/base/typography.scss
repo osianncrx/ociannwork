@@ -1,0 +1,54 @@
+/**=====================
+    1.2 Typography Scss start
+==========================**/
+
+@use "./variables.scss";
+
+body {
+    margin: 0;
+    font-family: variables.$dm-Sans-font;
+    transition: all 0.3s ease-in-out;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+h1 {
+    font-size: variables.$heading_1;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: variables.$heading_2;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: variables.$heading_3;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: variables.$heading_4;
+    font-weight: 700;
+}
+
+h5 {
+    font-size: variables.$heading_5;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: variables.$heading_6;
+    font-weight: 600;
+}
+
+/**=====================
+    1.2 Typography Scss Ends
+==========================**/

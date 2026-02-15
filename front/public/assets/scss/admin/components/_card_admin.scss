@@ -1,0 +1,156 @@
+/**=====================
+  5.1 Card CSS Start
+==========================**/
+
+@use '../../base/variables.scss';
+
+.card {
+  border: none;
+  border-radius: variables.$card-border-radius;
+  margin-bottom: 24px;
+  .card-header {
+    padding: variables.$card-padding;
+    background-color: rgba(var(--white), 1);
+    border-bottom: none;
+    position: relative;
+    &.custom-card-header,
+    &.manage-card-header {
+      flex-wrap: wrap;
+      @media (max-width: '540px') {
+        gap: 10px;
+      }
+      .flex-btns {
+        flex-wrap: wrap;
+        gap: calc(6px + (10 - 6) * ((100vw - 320px) / (1920 - 320))) !important;
+      }
+    }
+    &.card-no-border {
+      &::before {
+        display: none;
+      }
+    }
+    &::before {
+      content: '';
+      background-color: variables.$light-gray;
+      width: calc(100% - 33px);
+      height: 1px;
+      position: absolute;
+      left: 17px;
+      bottom: 0px;
+    }
+    &.page-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    h4 {
+      font-size: calc(19px + (22 - 19) * ((100vw - 320px) / (1920 - 320)));
+      font-weight: 700;
+      margin-bottom: calc(0px + (4 - 0) * ((100vw - 320px) / (1920 - 320)));
+    }
+    span {
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      font-weight: 400;
+      color: rgba(var(--text-color), 1);
+    }
+  }
+  .card-body {
+    padding: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)))
+      calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+    .profile-bg {
+      .user-image {
+        .avatar {
+          height: calc(85px + (95 - 85) * ((100vw - 320px) / (1920 - 320)));
+          img {
+            height: calc(80px + (100 - 80) * ((100vw - 320px) / (1920 - 320)));
+            width: calc(80px + (100 - 80) * ((100vw - 320px) / (1920 - 320)));
+          }
+          .profile-placeholder {
+            height: calc(80px + (100 - 80) * ((100vw - 320px) / (1920 - 320)));
+            width: calc(80px + (100 - 80) * ((100vw - 320px) / (1920 - 320)));
+          }
+          .icon-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: calc(92px + (95 - 92) * ((100vw - 320px) / (1920 - 320)));
+            svg {
+              height: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
+              width: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
+            }
+          }
+        }
+      }
+      .profile-data {
+        margin-top: calc(45px + (55 - 45) * ((100vw - 320px) / (1920 - 320)));
+        .profile-title {
+          font-size: calc(20px + (22 - 20) * ((100vw - 320px) / (1920 - 320)));
+          margin-bottom: calc(2px + (9 - 2) * ((100vw - 320px) / (1920 - 320)));
+        }
+        .contact-details {
+          svg {
+            height: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+            width: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+          }
+          span {
+            font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1920 - 320)));
+          }
+        }
+      }
+    }
+    .team-group {
+      .team-data {
+        padding: calc(12px + (20 - 12) * ((100vw - 320px) / (1920 - 320))) 0;
+        .team-des {
+          .user-info {
+            min-height: calc(40px + (50 - 40) * ((100vw - 320px) / (1920 - 320))) !important;
+            min-width: calc(40px + (50 - 40) * ((100vw - 320px) / (1920 - 320))) !important;
+            padding: calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320))) 0;
+          }
+          .user-data {
+            h5 {
+              font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+            }
+            span {
+              font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+            }
+          }
+        }
+      }
+    }
+    form {
+      &.vertical-tabs {
+        .accordion {
+          .accordion-item {
+            border-radius: 6px !important;
+            &:not(:first-of-type) {
+              border-top: 1px solid variables.$gray-300;
+              margin-block: 10px;
+            }
+            .accordion-header {
+              .accordion-button {
+                border-radius: 6px;
+                &:not(.collapsed) {
+                  background-color: variables.$primary-color;
+                  color: rgba(var(--white), 1);
+                  box-shadow: unset;
+                  &::after {
+                    filter: invert(1);
+                  }
+                }
+                &:focus {
+                  box-shadow: unset;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+  }
+}
+
+/**=====================
+    5.1 Card CSS End 
+==========================**/
