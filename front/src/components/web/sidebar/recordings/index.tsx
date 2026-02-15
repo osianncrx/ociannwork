@@ -3,6 +3,7 @@ import { URL_KEYS } from '../../../../constants/url'
 import { useAppSelector } from '../../../../store/hooks'
 import { SvgIcon } from '../../../../shared/icons'
 import { get, del, post } from '../../../../api'
+import ShareModal from './ShareModal'
 import './recordings.css'
 
 interface AITask {
@@ -98,6 +99,9 @@ const Recordings = () => {
   const [activeTab, setActiveTab] = useState<AITab>('summary')
   const [analyzingIds, setAnalyzingIds] = useState<Set<number>>(new Set())
   const [error, setError] = useState<string | null>(null)
+  const [shareModalRec, setShareModalRec] = useState<Recording | null>(null)
+  const [shareUrl, setShareUrl] = useState<string | null>(null)
+  const [shareLoading, setShareLoading] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const pollRef = useRef<NodeJS.Timeout | null>(null)
@@ -161,9 +165,22 @@ const Recordings = () => {
     setPlayingId(rec.id)
   }
 
-  const handleShare = (rec: Recording) => {
-    const url = `${window.location.origin}/recordings/${rec.id}`
-    window.open(url, `recording_${rec.id}`, 'width=1024,height=768,scrollbars=yes,resizable=yes')
+  const handleSharePublic = async (rec: Recording) => {
+    setShareModalRec(rec)
+    setShareUrl(null)
+    setShareLoading(true)
+    try {
+      const res = await post<{}, { publicUrl: string; share_token: string }>(
+        URL_KEYS.Recordings.MakePublic.replace(':id', rec.id.toString()),
+        {},
+      )
+      setShareUrl(res.publicUrl)
+    } catch (err) {
+      console.error('Error generating public link:', err)
+      setShareUrl(null)
+    } finally {
+      setShareLoading(false)
+    }
   }
 
   const handleDownload = (rec: Recording) => {
@@ -188,7 +205,6 @@ const Recordings = () => {
     try {
       setAnalyzingIds((prev) => new Set(prev).add(rec.id))
       await post(URL_KEYS.Recordings.Analyze.replace(':id', rec.id.toString()), {})
-      // Update local state
       setRecordings((prev) =>
         prev.map((r) => (r.id === rec.id ? { ...r, ai_status: 'processing' as const } : r)),
       )
@@ -256,7 +272,6 @@ const Recordings = () => {
       )
     }
 
-    // ai_status === 'completed'
     return (
       <div className="ai-content">
         <div className="ai-tabs">
@@ -330,9 +345,7 @@ const Recordings = () => {
                           <td>
                             <span
                               className="task-priority"
-                              style={{
-                                background: priorityColors[task.priority] || '#999',
-                              }}
+                              style={{ background: priorityColors[task.priority] || '#999' }}
                             >
                               {task.priority}
                             </span>
@@ -473,7 +486,11 @@ const Recordings = () => {
               >
                 <span className="ai-icon-text">AI</span>
               </button>
-              <button className="rec-action-btn share" onClick={() => handleShare(rec)} title="Compartir">
+              <button
+                className="rec-action-btn share"
+                onClick={() => handleSharePublic(rec)}
+                title="Compartir público"
+              >
                 <span style={{ fontSize: '11px', fontWeight: 600 }}>Compartir</span>
               </button>
               <button className="rec-action-btn download" onClick={() => handleDownload(rec)} title="Descargar">
@@ -504,6 +521,19 @@ const Recordings = () => {
           </div>
         )}
       </div>
+
+      {/* Share Modal */}
+      {shareModalRec && (
+        <ShareModal
+          recording={shareModalRec}
+          publicUrl={shareUrl}
+          loading={shareLoading}
+          onClose={() => {
+            setShareModalRec(null)
+            setShareUrl(null)
+          }}
+        />
+      )}
     </div>
   )
 }

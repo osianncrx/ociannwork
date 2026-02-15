@@ -92,6 +92,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: true,
       },
+      share_token: {
+        type: DataTypes.STRING(64),
+        allowNull: true,
+        unique: true,
+      },
+      is_public: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       tableName: 'call_recordings',

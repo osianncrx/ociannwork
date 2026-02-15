@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const { CallRecording, User, Team } = require('../models');
 const { Op } = require('sequelize');
 const aiMeetingService = require('../services/ai-meeting.service');
@@ -315,6 +316,108 @@ exports.getShareLink = async (req, res) => {
     });
   } catch (error) {
     console.error('Error generating share link:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+/**
+ * Generate a public share token for a recording
+ */
+exports.makePublic = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const teamId = req.header('X-Team-ID');
+
+    const recording = await CallRecording.findOne({
+      where: { id, team_id: teamId },
+    });
+
+    if (!recording) {
+      return res.status(404).json({ message: 'Recording not found' });
+    }
+
+    const userEmail = req.user.email.toLowerCase();
+    const isRecordingAdmin =
+      req.user.role === 'super_admin' ||
+      ADMIN_RECORDING_EMAILS.includes(userEmail);
+
+    if (!isRecordingAdmin && recording.initiator_id !== req.user.id) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    // Generate token if not already public
+    let shareToken = recording.share_token;
+    if (!shareToken) {
+      shareToken = crypto.randomBytes(32).toString('hex');
+      await recording.update({ share_token: shareToken, is_public: true });
+    } else {
+      await recording.update({ is_public: true });
+    }
+
+    const baseUrl = process.env.FRONTEND_URL || 'https://ociannwork.com';
+    const publicUrl = `${baseUrl}/r/${shareToken}`;
+
+    return res.status(200).json({
+      message: 'Public link generated',
+      publicUrl,
+      share_token: shareToken,
+    });
+  } catch (error) {
+    console.error('Error making recording public:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+/**
+ * Revoke public access to a recording
+ */
+exports.revokePublic = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const teamId = req.header('X-Team-ID');
+
+    const recording = await CallRecording.findOne({
+      where: { id, team_id: teamId },
+    });
+
+    if (!recording) {
+      return res.status(404).json({ message: 'Recording not found' });
+    }
+
+    await recording.update({ is_public: false });
+
+    return res.status(200).json({ message: 'Public access revoked' });
+  } catch (error) {
+    console.error('Error revoking public access:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+/**
+ * Get a recording by public share token (NO AUTH REQUIRED)
+ */
+exports.getPublicRecording = async (req, res) => {
+  try {
+    const { token } = req.params;
+
+    const recording = await CallRecording.findOne({
+      where: { share_token: token, is_public: true, status: 'ready' },
+      include: [
+        {
+          model: User,
+          as: 'initiator',
+          attributes: ['id', 'name', 'avatar', 'profile_color'],
+        },
+      ],
+    });
+
+    if (!recording) {
+      return res.status(404).json({ message: 'Recording not found or access revoked' });
+    }
+
+    return res.status(200).json({ recording });
+  } catch (error) {
+    console.error('Error fetching public recording:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 };

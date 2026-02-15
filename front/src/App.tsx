@@ -8,6 +8,7 @@ import { queries } from './api'
 import ComponentNavigation from './components/ComponentNavigation'
 import HelpSection from './components/web/help'
 import RecordingDetail from './pages/RecordingDetail'
+import RecordingPublic from './pages/RecordingPublic'
 import { ImageBaseUrl, STORAGE_KEYS } from './constants'
 import InternetConnectionWrapper from './layout/InternetConnectionWrapper'
 import SocketProvider from './layout/web/components/SocketProvider'
@@ -33,6 +34,7 @@ const AppContent = () => {
   const isAdminRoute = window.location.pathname.startsWith('/admin')
   const isHelpsRoute = window.location.pathname === '/help'
   const isRecordingRoute = /^\/recordings\/\d+/.test(window.location.pathname)
+  const isPublicRecordingRoute = /^\/r\/[a-f0-9]+/.test(window.location.pathname)
   const dispatch = useDispatch()
   const storage = getStorage()
   const { permissionModal } = useAppSelector((state) => state.teamSetting)
@@ -231,7 +233,9 @@ const AppContent = () => {
         {screen === 'webScreen' && (
           <div onClick={onToolSidebarToggle} className={`bg-overlay ${toolSidebarToggle ? 'show' : ''}`} />
         )}
-        {isRecordingRoute ? (
+        {isPublicRecordingRoute ? (
+          <RecordingPublic />
+        ) : isRecordingRoute ? (
           <BrowserRouter><RecordingDetail /></BrowserRouter>
         ) : isAdminRoute ? (
           <RouterProvider router={Router} />

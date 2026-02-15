@@ -30,6 +30,12 @@ const upload = multer({
   },
 });
 
+// PUBLIC route - no auth required (MUST be before /:id to avoid conflict)
+router.get(
+  '/public/:token',
+  recordingController.getPublicRecording
+);
+
 router.post(
   '/upload',
   authenticate,
@@ -71,6 +77,20 @@ router.post(
   authenticate,
   authorizeTeamRole(['admin', 'member']),
   recordingController.analyzeRecording
+);
+
+router.post(
+  '/:id/make-public',
+  authenticate,
+  authorizeTeamRole(['admin', 'member']),
+  recordingController.makePublic
+);
+
+router.post(
+  '/:id/revoke-public',
+  authenticate,
+  authorizeTeamRole(['admin', 'member']),
+  recordingController.revokePublic
 );
 
 module.exports = router;

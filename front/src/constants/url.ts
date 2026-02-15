@@ -141,6 +141,9 @@ const URL = {
     Delete: 'recordings/:id',
     Share: 'recordings/:id/share',
     Analyze: 'recordings/:id/analyze',
+    MakePublic: 'recordings/:id/make-public',
+    RevokePublic: 'recordings/:id/revoke-public',
+    Public: 'recordings/public/:token',
   },
 } as const
 
