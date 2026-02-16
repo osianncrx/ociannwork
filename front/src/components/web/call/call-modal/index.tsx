@@ -566,8 +566,15 @@ const CallModal: FC<CallModalProps> = ({ isOpen, onClose, isMinimized, onMinimiz
             )}
           </div>
           
-          <CallControls callState={callState} onClose={onClose} />
+          <CallControls callState={callState} onClose={onClose} participants={participants} />
         </div>
+
+        {/* Remote Control Request Modal */}
+        <RemoteControlRequestModal
+          isOpen={!!remoteControl.pendingRequestFrom && !!remoteControl.pendingRequestName}
+          requesterId={remoteControl.pendingRequestFrom || ''}
+          requesterName={remoteControl.pendingRequestName || ''}
+        />
       </ModalBody>
     </Modal>
   )
