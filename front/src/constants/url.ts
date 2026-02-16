@@ -134,6 +134,18 @@ const URL = {
     Status: 'impersonation/status',
     GetMyTeams: 'impersonation/my-teams',
   },
+  Drive: {
+    List: 'drive',
+    Upload: 'drive/upload',
+  },
+  VirtualOffice: {
+    GetRooms: 'virtual-office/rooms',
+    JoinRoom: 'virtual-office/join',
+    LeaveRoom: 'virtual-office/leave',
+    GetRoomUsers: 'virtual-office/rooms/:roomId/users',
+    SendQuickMessage: 'virtual-office/quick-message',
+    GetMyRoom: 'virtual-office/my-room',
+  },
   Recordings: {
     Upload: 'recordings/upload',
     List: 'recordings',
@@ -144,6 +156,60 @@ const URL = {
     MakePublic: 'recordings/:id/make-public',
     RevokePublic: 'recordings/:id/revoke-public',
     Public: 'recordings/public/:token',
+  },
+  Attendance: {
+    // Marks
+    InsertMark: 'attendance/marks',
+    GetMarks: 'attendance/marks/list',
+    GetMarksToday: 'attendance/marks/today',
+    GetWorkday: 'attendance/marks/workday',
+    GetBreak: 'attendance/marks/break',
+    InsertExit: 'attendance/marks/exit',
+    // Edit marks
+    EditMark: 'attendance/marks/edit',
+    ApproveMark: 'attendance/marks/edit/approve',
+    RejectMark: 'attendance/marks/edit/reject',
+    MyEditRequests: 'attendance/marks/edit/mine',
+    AllEditRequests: 'attendance/marks/edit/all',
+    MissingExitDays: 'attendance/marks/edit/missing-exit',
+    RequestMissingExit: 'attendance/marks/edit/request-exit',
+    // Status
+    EmployeeStatusDashboard: 'attendance/status/dashboard',
+    EmployeeStatusByDate: 'attendance/status/by-date',
+    // Projects
+    ListProjects: 'attendance/projects',
+    CreateProject: 'attendance/projects',
+    UpdateProject: 'attendance/projects/:id',
+    DeleteProject: 'attendance/projects/:id',
+    ProjectMark: 'attendance/projects/marks',
+    ProjectThreshold: 'attendance/projects/threshold',
+    // Overtime
+    RequestOvertime: 'attendance/overtime',
+    MyOvertime: 'attendance/overtime/mine',
+    AcceptedOvertime: 'attendance/overtime/accepted',
+    AllOvertime: 'attendance/overtime/all',
+    ApproveOvertime: 'attendance/overtime/approve',
+    // Reports
+    AdminReport: 'attendance/reports/admin',
+    MyReport: 'attendance/reports/mine',
+    // Holidays
+    GetHolidays: 'attendance/holidays',
+    // Companies
+    ListCompanies: 'attendance/companies',
+    CreateCompany: 'attendance/companies',
+    UpdateCompany: 'attendance/companies/:id',
+    CompanyStats: 'attendance/companies/:id/stats',
+    // Users
+    ListAttendanceUsers: 'attendance/users',
+    CreateAttendanceUser: 'attendance/users',
+    UpdateAttendanceUser: 'attendance/users/:id',
+    GetAttendanceUser: 'attendance/users/:id',
+    RegisterBankAccount: 'attendance/users/bank-accounts',
+    ListBankAccounts: 'attendance/users/bank-accounts/list',
+    // Teams Integration
+    TestTeamsWebhook: 'attendance/teams-integration/test',
+    SendTeamsReport: 'attendance/teams-integration/report',
+    GetTeamsLogs: 'attendance/teams-integration/logs',
   },
 } as const
 

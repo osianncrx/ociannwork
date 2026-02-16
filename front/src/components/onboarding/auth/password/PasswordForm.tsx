@@ -16,8 +16,6 @@ import { errorMessage, toaster } from '../../../../utils/custom-functions'
 import { emailSchema } from '../../../../utils/validation-schemas'
 import { initializeUserEncryptionKeysWithApi } from '../../../../utils/encryption-utils'
 
-const DEMO_PASSWORD = '123456789'
-
 const PasswordForm = () => {
   const dispatch = useAppDispatch()
   const { loading } = useAppSelector((store) => store.loader)
@@ -26,15 +24,6 @@ const PasswordForm = () => {
   const checkEmail = storage.getItem(STORAGE_KEYS.CHECK_EMAIL) || null
   const { t } = useTranslation()
   const { refetch: fetchTeams } = queries.useGetTeamList()
-
-  const handleCopyPassword = async (setFieldValue: (field: string, value: any) => void) => {
-    try {
-      await navigator.clipboard.writeText(DEMO_PASSWORD)
-      setFieldValue('password', DEMO_PASSWORD)
-    } catch (error) {
-      // Silent fail
-    }
-  }
 
   const handleSubmit = async (values: LoginPayload) => {
     try {
@@ -81,7 +70,7 @@ const PasswordForm = () => {
       onSubmit={handleSubmit}
       validateOnBlur={false}
     >
-      {(formik) => (
+      {() => (
         <Form className="login-form ">
           <TextInput
             autoFocus
@@ -108,16 +97,7 @@ const PasswordForm = () => {
             </div>
           </div>
 
-          <SolidButton title="Join In" type="submit" color="primary" className="w-100 login-btn" loading={loading} />
-
-          {/* Demo Credentials */}
-          <div className="demo-credentials">
-            <div className="demo-credentials-label">Demo Credentials</div>
-            <div className="demo-credential-item" onClick={() => handleCopyPassword(formik.setFieldValue)}>
-              <span className="credential-value">{DEMO_PASSWORD}</span>
-              <SvgIcon iconId="copy-icon" className="copy-icon" />
-            </div>
-          </div>
+          <SolidButton title="login_button" type="submit" color="primary" className="w-100 login-btn" loading={loading} />
         </Form>
       )}
     </Formik>

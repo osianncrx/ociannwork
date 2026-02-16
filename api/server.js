@@ -53,7 +53,13 @@ const PORT = process.env.PORT || 3000;
         expireDND(io);
         expireSubscription(io);
 
-        console.log("✅ Cron jobs started");
+        // Attendance module cron jobs
+        const attendanceAutoExit = require('./cron/attendance-auto-exit');
+        const attendanceTeamsReport = require('./cron/attendance-teams-report');
+        attendanceAutoExit(io);
+        attendanceTeamsReport(io);
+
+        console.log("✅ Cron jobs started (including attendance)");
       } catch (err) {
         console.warn("⚠️ Running without database features - visit /install to configure");
       }

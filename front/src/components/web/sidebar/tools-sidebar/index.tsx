@@ -19,17 +19,19 @@ const ToolSidebar = () => {
   const navigate = useNavigate()
 
   const menuItems = [
-    { icon: 'home', label: 'Home', key: 'home' },
-    { icon: 'search-sidebar', label: 'Search', key: 'Search', actions: () => dispatch(setSearchModal()) },
-    { icon: 'folder-open', label: 'Files', key: 'files' },
-    { icon: 'reminder', label: 'Reminder', key: 'reminder' },
-    { icon: 'magic-star', label: 'Starred', key: 'favorite' },
-    { icon: 'pin', label: 'Pin', key: 'pin' },
-    { icon: 'directory', label: 'Directory', key: 'directory' },
-    { icon: 'video', label: 'Recordings', key: 'recordings' },
-    { icon: 'sidebar-setting', label: 'Settings', key: 'settings' },
+    { icon: 'home', label: 'Oficina', key: 'virtual-office' },
+    { icon: 'group-chat', label: 'Chat', key: 'home' },
+    { icon: 'search-sidebar', label: 'Buscar', key: 'Search', actions: () => dispatch(setSearchModal()) },
+    { icon: 'folder-open', label: 'Archivos', key: 'files' },
+    { icon: 'reminder', label: 'Recordatorios', key: 'reminder' },
+    { icon: 'magic-star', label: 'Favoritos', key: 'favorite' },
+    { icon: 'pin', label: 'Fijados', key: 'pin' },
+    { icon: 'directory', label: 'Directorio', key: 'directory' },
+    { icon: 'video', label: 'Grabaciones', key: 'recordings' },
+    { icon: 'sidebar-setting', label: 'Configuración', key: 'settings' },
+    { icon: 'clock', label: 'Marcas', key: 'attendance', emoji: '⏰' },
   ]
-  const faqItem = { icon: 'confirmation', label: 'Help', key: 'help' }
+  const faqItem = { icon: 'confirmation', label: 'Ayuda', key: 'help' }
 
   useEffect(() => {
     if (location.pathname === '/help') {
@@ -44,9 +46,11 @@ const ToolSidebar = () => {
         dispatch(setCurrentTab(tabFromUrl))
       }
     } else {
-      if (currentTab !== 'home') {
-        dispatch(setCurrentTab('home'))
+      // No tab or invalid tab: default to virtual-office
+      if (currentTab !== 'virtual-office') {
+        dispatch(setCurrentTab('virtual-office'))
       }
+      navigate(`?tab=virtual-office`, { replace: true })
     }
   }, [searchParams, dispatch, navigate, currentTab, location.pathname])
 
@@ -67,7 +71,9 @@ const ToolSidebar = () => {
     if (item.actions) {
       e.preventDefault()
       item.actions()
-    } else if (item.key !== 'help') {
+    } else if (item.key === 'help') {
+      // Let the NavLink handle navigation for help (external route)
+    } else {
       e.preventDefault()
       navigate(`?tab=${item.key}`, { replace: true })
       dispatch(setCurrentTab(item.key))
@@ -100,7 +106,11 @@ const ToolSidebar = () => {
                   onClick={(e) => handleClick(item, e)}
                 >
                   <div className="header-symbol btn-effect">
-                    <SvgIcon iconId={item.icon} />
+                    {(item as any).emoji ? (
+                      <span style={{ fontSize: '1.2rem' }}>{(item as any).emoji}</span>
+                    ) : (
+                      <SvgIcon iconId={item.icon} />
+                    )}
                   </div>
                   <span className="text-title">{item.label}</span>
                 </NavLink>

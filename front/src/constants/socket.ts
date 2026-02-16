@@ -74,5 +74,24 @@ export const SOCKET = {
     // e2e encryption
     Exchange_Encryption_Key: 'exchange-encryption-key',
     Encryption_Key_Received: 'encryption-key-received',
+
+    // remote control
+    Request_Remote_Control: 'request-remote-control',
+    Accept_Remote_Control: 'accept-remote-control',
+    Deny_Remote_Control: 'deny-remote-control',
+    Stop_Remote_Control: 'stop-remote-control',
+
+    // virtual office
+    VO_Join_Room: 'vo:join-room',
+    VO_Leave_Room: 'vo:leave-room',
+    VO_Get_Rooms: 'vo:get-rooms',
+    VO_Send_Quick_Message: 'vo:send-quick-message',
+  },
+  VOListeners: {
+    Room_Update: 'vo:room-update',
+    Rooms_State: 'vo:rooms-state',
+    User_Joined_Room: 'vo:user-joined-room',
+    User_Left_Room: 'vo:user-left-room',
+    Quick_Message_Received: 'vo:quick-message-received',
   },
 }

@@ -1,0 +1,33 @@
+class RouteName {
+  final String splash = '/';
+  final String splash1 = '/splash';
+  final String login = '/login';
+  final String passwordScreen = '/PasswordScreen';
+  final String forgotPassScreen = '/ForgotPassScreen';
+  final String otpScreen = '/OtpScreen';
+  final String newPassScreen = '/NewPassScreen';
+  final String reviewTerms = '/ReviewTerms';
+  final String createTeamScreen = '/CreateTeamScreen';
+  final String editProfileScreen = '/editProfileScreen';
+  final String changePasswordScreen = '/changePasswordScreen';
+  final String discoverTerms = '/DiscoverTerms';
+  final String profileSetupScreen = '/ProfileSetupScreen';
+  final String createPasswordScreen = '/CreatePasswordScreen';
+  final String welcomeTeamwiseScreen = '/WelcomeTeamwiseScreen';
+  final String chatChannelScreen = '/chatChannelScreen';
+  final String customFieldsScreen = '/customFieldsScreen';
+  final String createChannelForm = '/createChannelForm';
+  final String inviteTeamScreen = '/InviteTeamScreen';
+  final String dashboard = '/Dashboard';
+  final String moreScreen = '/MoreScreen';
+  final String memberScreen = '/MemberScreen';
+  final String channelsScreen = '/ChannelsScreen';
+  final String remindersScreen = '/RemindersScreen';
+  final String createReminderScreen = '/CreateReminderScreen';
+  final String contactProfile = '/ContactProfile';
+  final String favoriteScreen = '/FavoriteScreen';
+  final String pinMessageScreen = '/pinMessageScreen';
+  final String filesScreen = '/FilesScreen';
+  final String globalSearchScreen = '/GlobalSearchScreen';
+  final String invalidDataScreen = '/InvalidDataScreen';
+}

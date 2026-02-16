@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux'
 import { Button, Modal, ModalBody } from 'reactstrap'
 import { CHAT_CONSTANTS, ChatType, ImageBaseUrl } from '../../../../constants'
 import { NotificationService } from '../../../../services/notification.service'
-import { CallParticipant, CallState, webrtcService } from '../../../../services/webrtc.service'
+import { CallParticipant, CallState, RemoteControlState, webrtcService } from '../../../../services/webrtc.service'
 import { SvgIcon } from '../../../../shared/icons'
 import { useAppSelector } from '../../../../store/hooks'
 import { setCallParticipants, setCurrentCallStatus } from '../../../../store/slices/chatSlice'
 import { CallModalProps } from '../../../../types'
 import CallControls from './CallControls'
+import RemoteControlRequestModal from './RemoteControlRequestModal'
 import { Image } from '../../../../shared/image'
 
 const CallModal: FC<CallModalProps> = ({ isOpen, onClose, isMinimized, onMinimize, onMaximize }) => {
@@ -18,6 +19,7 @@ const CallModal: FC<CallModalProps> = ({ isOpen, onClose, isMinimized, onMinimiz
   const [isMaximized, setIsMaximized] = useState<boolean>(false)
   const [isManuallyMaximized, setIsManuallyMaximized] = useState<boolean>(false);
   const [e2eStatus, setE2EStatus] = useState(webrtcService.getE2EStatus())
+  const [remoteControl, setRemoteControl] = useState<RemoteControlState>(webrtcService.getRemoteControlState())
   const { user } = useAppSelector((store) => store.auth)
 
   const localVideoRef = useRef<HTMLVideoElement>(null)
@@ -81,12 +83,15 @@ const CallModal: FC<CallModalProps> = ({ isOpen, onClose, isMinimized, onMinimiz
     const unsubscribeState = webrtcService.onStateChange((state) => {
       setCallState(state)
       setE2EStatus(webrtcService.getE2EStatus())
+      setRemoteControl(state.remoteControl)
     })
     const unsubscribeParticipants = webrtcService.onParticipantUpdate(setParticipants)
+    const unsubscribeRC = webrtcService.onRemoteControlChange(setRemoteControl)
 
     return () => {
       unsubscribeState()
       unsubscribeParticipants()
+      unsubscribeRC()
       NotificationService.stopCallSound()
     }
   }, [])

@@ -43,10 +43,10 @@ const Header = ({ activeTab, setActiveTab, tabArray }: HelpHeaderProps) => {
                   <Image
                     src={mixBackgroundLayout !== 'light' ? logo_light_url : logo_dark_url}
                     alt="OciannWork"
-                    height={35}
+                    height={80}
                   />
                 ) : (
-                  <Image src="/logo/ociannwork-logo.png" alt="OciannWork" height={35} />
+                  <Image src="/logo/ociannwork-logo.png" alt="OciannWork" height={80} />
                 )}
                 <p>Help Center</p>
               </NavbarBrand>

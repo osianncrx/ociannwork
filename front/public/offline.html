@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCIANN - Sin Conexion</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a0f1a, #0f172a);
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+    }
+    .icon { font-size: 4rem; margin-bottom: 1rem; }
+    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    p { color: #94a3b8; margin-bottom: 1.5rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:hover { background: #2563eb; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">&#128268;</div>
+    <h1>Sin Conexion</h1>
+    <p>No tienes conexion a internet. Las marcas se guardaran localmente y se sincronizaran cuando vuelvas a conectarte.</p>
+    <button class="btn" onclick="window.location.reload()">Reintentar</button>
+  </div>
+</body>
+</html>

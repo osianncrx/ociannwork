@@ -9,7 +9,7 @@ const ShareLocation: FC<ShareLocationProps> = ({ onLocationSelected, disabled = 
 
   const getCurrentLocation = () => {
     if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser')
+      alert('La geolocalización no es compatible con tu navegador')
       return
     }
 
@@ -54,16 +54,16 @@ const ShareLocation: FC<ShareLocationProps> = ({ onLocationSelected, disabled = 
       },
       (error) => {
         console.error('Error getting location:', error)
-        let errorMessage = 'Failed to get your location'
+        let errorMessage = 'Error al obtener tu ubicación'
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            errorMessage = 'Location access denied. Please enable location permissions.'
+            errorMessage = 'Acceso a ubicación denegado. Habilita los permisos de ubicación.'
             break
           case error.POSITION_UNAVAILABLE:
-            errorMessage = 'Location information unavailable.'
+            errorMessage = 'Información de ubicación no disponible.'
             break
           case error.TIMEOUT:
-            errorMessage = 'Location request timed out.'
+            errorMessage = 'La solicitud de ubicación expiró.'
             break
         }
         alert(errorMessage)
@@ -78,7 +78,7 @@ const ShareLocation: FC<ShareLocationProps> = ({ onLocationSelected, disabled = 
   }
 
   return (
-    <Hint label="Share Location">
+    <Hint label="Compartir Ubicación">
       <Button disabled={disabled || isLoading} className='location-btn' size="iconSm" onClick={getCurrentLocation}>
         {isLoading ? (
           <Spinner size="sm" className="location-spinner" />

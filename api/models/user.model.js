@@ -80,6 +80,43 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         comment: "User's public key for E2E encryption",
       },
+      // Attendance module fields
+      apellidos: {
+        type: DataTypes.STRING(150),
+        allowNull: true,
+        comment: "Last name(s) for attendance module",
+      },
+      puesto: {
+        type: DataTypes.STRING(100),
+        allowNull: true,
+        comment: "Job position/title",
+      },
+      fecha_entrada: {
+        type: DataTypes.DATEONLY,
+        allowNull: true,
+        comment: "Company join date",
+      },
+      id_persona: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        unique: true,
+        comment: "National ID / Cedula for attendance",
+      },
+      tipo_permiso_marcas: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        comment: "Attendance role: 0=User, 1=Admin, 2=Supervisor, 3=SuperUser",
+      },
+      firsttime: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        comment: "Must change password on first attendance login",
+      },
+      es_super_admin_marcas: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        comment: "Super admin for attendance multi-tenant",
+      },
     },
     {
       tableName: "users",
@@ -116,6 +153,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "user_id"
     });
 
+    // Attendance associations
+    User.hasMany(models.Marca, { foreignKey: "user_id", as: "marcas" });
+    User.hasMany(models.EditarMarca, { foreignKey: "user_id", as: "editarMarcas" });
+    User.hasMany(models.MarcaProyectoEspecial, { foreignKey: "user_id", as: "marcasProyecto" });
+    User.hasMany(models.Extra, { foreignKey: "user_id", as: "extras" });
+    User.hasMany(models.CuentaBancaria, { foreignKey: "user_id", as: "cuentasBancarias" });
+    User.hasMany(models.TeamsNotificationLog, { foreignKey: "user_id", as: "teamsLogs" });
   };
 
   // Define a method to remove sensitive fields before serializing to JSON

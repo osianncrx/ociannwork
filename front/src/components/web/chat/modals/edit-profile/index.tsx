@@ -126,7 +126,7 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ isOpen, toggle }) => {
       return new Promise<void>((resolve, reject) => {
         updateProfile(formData, {
           onSuccess: (response) => {
-            const message = response?.message || 'Profile updated successfully'
+            const message = response?.message || 'Perfil actualizado exitosamente'
             toast.success(message)
             refetch()
             toggle()
@@ -141,7 +141,7 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ isOpen, toggle }) => {
             }
           },
           onError: (err: any) => {
-            toast.error(err.message || 'Failed to update profile')
+            toast.error(err.message || 'Error al actualizar perfil')
             reject(err)
           },
         })
@@ -166,7 +166,7 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ isOpen, toggle }) => {
               toggle()
             },
             onError: (err: any) => {
-              toaster('error', err.message || 'Failed to update password')
+              toaster('error', err.message || 'Error al actualizar contraseña')
               reject(err)
             },
           },
@@ -180,10 +180,10 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ isOpen, toggle }) => {
 
   const tabItems = useMemo(() => {
     const items = [
-      { id: '1', icon: 'security-user-tick', label: 'Personal Details' },
-      { id: '2', icon: 'security-password', label: 'Change Password' },
+      { id: '1', icon: 'security-user-tick', label: 'Datos Personales' },
+      { id: '2', icon: 'security-password', label: 'Cambiar Contraseña' },
     ] as { id: string; icon: string; label: string }[]
-    if (hasCustomFields) items.push({ id: '3', icon: 'security-password', label: 'Other Details' })
+    if (hasCustomFields) items.push({ id: '3', icon: 'security-password', label: 'Otros Datos' })
     return items
   }, [hasCustomFields])
 
@@ -192,7 +192,7 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ isOpen, toggle }) => {
       <SimpleModal
         isOpen={isOpen}
         onClose={toggle}
-        title="Preferences"
+        title="Preferencias"
         size="lg"
         className="edit-profile-modal custom-form-modal-input"
         closeOnBackdrop={!isPending && !isPasswordPending}
@@ -235,10 +235,10 @@ const EditProfileModal: FC<EditProfileModalProps> = ({ isOpen, toggle }) => {
           setConfirmRemoveMemberOpen(false)
         }}
         onConfirm={confirmRemoveAvatar}
-        title="Remove Profile Picture"
-        subtitle={`Are you sure you want to remove profile picture.`}
-        confirmText="Remove"
-        cancelText="Cancel"
+        title="Eliminar Foto de Perfil"
+        subtitle={`¿Estás seguro de que quieres eliminar tu foto de perfil?`}
+        confirmText="Eliminar"
+        cancelText="Cancelar"
         variant="danger"
         showIcon={true}
         iconId="edit-profile"

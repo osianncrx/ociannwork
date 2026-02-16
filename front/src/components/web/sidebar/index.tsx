@@ -12,6 +12,7 @@ import Settings from './settings'
 import ToolSidebar from './tools-sidebar'
 import UserChannelSidebar from './user-channel-sidebar'
 import UserProfile from './user-channel-sidebar/user-profile'
+import AttendanceNav from './attendance-nav'
 
 const ChatSidebar = () => {
   const { currentTab } = useAppSelector((state) => state.screen)
@@ -22,6 +23,7 @@ const ChatSidebar = () => {
   const [previousTab, setPreviousTab] = useState(currentTab)
 
   const tabConfig: { [key: string]: { label: string; icon: string } } = {
+    'virtual-office': { label: 'Oficina Virtual', icon: 'home' },
     home: { label: 'Home', icon: 'home' },
     reminder: { label: 'Reminder', icon: 'reminder' },
     directory: { label: 'Directory', icon: 'directory' },
@@ -34,6 +36,7 @@ const ChatSidebar = () => {
     pin: { label: 'Pin', icon: 'pin' },
     recordings: { label: 'Recordings', icon: 'video' },
     setting: { label: 'Setting', icon: 'sidebar-setting' },
+    attendance: { label: 'Marcas', icon: 'clock' },
   }
 
   // Sync Redux state with URL on component mount and URL changes
@@ -80,6 +83,8 @@ const ChatSidebar = () => {
     }
 
     switch (currentTab) {
+      case 'virtual-office':
+        return <UserChannelSidebar />
       case 'home':
         return <UserChannelSidebar />
       case 'reminder':
@@ -96,6 +101,8 @@ const ChatSidebar = () => {
         return <Settings />
       case 'recordings':
         return <Recordings />
+      case 'attendance':
+        return <AttendanceNav />
       default:
         return <UserChannelSidebar />
     }

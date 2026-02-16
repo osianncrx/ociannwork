@@ -3,7 +3,7 @@ import { Screen, ScreenState } from '../../types'
 
 const initialState: ScreenState = {
   screen: 'customFields',
-  currentTab: "home"
+  currentTab: "virtual-office"
 }
 
 const screenSlice = createSlice({

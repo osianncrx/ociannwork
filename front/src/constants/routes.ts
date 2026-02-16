@@ -18,6 +18,7 @@ export const ROUTES = {
     PLAN_SUBSCRIBE: '/admin/plans/:slug/subscribe',
     SUBSCRIPTION: '/admin/subscription',
     WALLET: '/admin/wallet',
+    VIRTUAL_OFFICE: '/admin/virtual-office',
   },
   CHAT: {
     FAQS: '/faqs',
@@ -25,5 +26,20 @@ export const ROUTES = {
   PAYMENT: {
     SUCCESS: '/admin/payment/success',
     CANCEL: '/admin/payment/cancel',
+  },
+  ATTENDANCE: {
+    HOME: '/attendance',
+    EMPLOYEE_STATUS: '/attendance/employee-status',
+    EMPLOYEE_STATUS_DATE: '/attendance/employee-status-date',
+    ACCEPT_MARKS: '/attendance/accept-marks',
+    ACCEPT_OVERTIME: '/attendance/accept-overtime',
+    REQUEST_OVERTIME: '/attendance/request-overtime',
+    VIEW_OVERTIME: '/attendance/view-overtime',
+    MY_REPORT: '/attendance/my-report',
+    ADMIN_REPORT: '/attendance/admin-report',
+    MANAGE_USERS: '/attendance/manage-users',
+    MANAGE_PROJECTS: '/attendance/manage-projects',
+    SUPER_ADMIN: '/attendance/super-admin',
+    BANK_ACCOUNTS: '/attendance/bank-accounts',
   },
 } as const

@@ -5,7 +5,6 @@ import { post } from '../../../../api'
 import { STORAGE_KEYS, URL_KEYS } from '../../../../constants'
 import { SolidButton } from '../../../../shared/button'
 import { TextInput } from '../../../../shared/form-fields'
-import { SvgIcon } from '../../../../shared/icons'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import { emailCheckSuccess } from '../../../../store/slices/authSlice'
 import { hideLoader, showLoader } from '../../../../store/slices/loaderSlice'
@@ -22,18 +21,6 @@ const EmailForm = () => {
   const storage = getStorage()
   const keepMail = storage.getItem(STORAGE_KEYS.KEEP_MAIL) 
   const checkEmail = storage.getItem(STORAGE_KEYS.CHECK_EMAIL)
-
-  const isProduction = import.meta.env.PROD
-  const demoEmails = isProduction ? ['aaron.stone@ociannwork.com', 'nicholas.chapman@ociannwork.com'] : ['virat@icc.com', 'rohit@icc.com']
-
-  const handleCopyEmail = async (email: string, setFieldValue: (field: string, value: any) => void) => {
-    try {
-      await navigator.clipboard.writeText(email)
-      setFieldValue('email', email)
-    } catch (error) {
-      // Silent fail
-    }
-  }
 
   useEffect(() => {
     if (keepMail) {
@@ -72,7 +59,7 @@ const EmailForm = () => {
       onSubmit={handleEmailCheck}
       validateOnBlur={false}
     >
-      {(formik) => (
+      {() => (
         <Form className="login-form" autoComplete="off">
           <div className="login-input">
             <TextInput
@@ -97,17 +84,6 @@ const EmailForm = () => {
             className="w-100 login-btn mb-0"
             loading={loading}
           />
-
-          {/* Demo Credentials */}
-          <div className="demo-credentials">
-            <div className="demo-credentials-label">Demo Credentials</div>
-            {demoEmails.map((email) => (
-              <div key={email} className="demo-credential-item" onClick={() => handleCopyEmail(email, formik.setFieldValue)}>
-                <span className="credential-value">{email}</span>
-                <SvgIcon iconId="copy-icon" className="copy-icon" />
-              </div>
-            ))}
-          </div>
         </Form>
       )}
     </Formik>

@@ -160,24 +160,16 @@ const VerifyOtpForm = () => {
             />
           </div>
 
-          {isDemoMode && (
-            <p className="text-danger small my-3">
-              App is in demo mode. Use <strong>123456</strong> as OTP.
-            </p>
-          )}
-
-          {!isDemoMode && (
-            <p>
+          <p>
               {t('didnt_receive_the_pin')}{' '}
               <a
                 role="button"
                 className={`resend link-text ${resendDisabled ? 'disabled' : ''}`}
                 onClick={!resendDisabled ? handleResendOtp : undefined}
               >
-                {resendDisabled && !resendOtpLoading ? `Resend in ${coolDown}s` : 'Resend PIN'}
+                {resendDisabled && !resendOtpLoading ? `${t('resend_in')} ${coolDown}s` : t('resend_PIN')}
               </a>
             </p>
-          )}
 
           <SolidButton loading={isPending} title="verify" type="submit" color="primary" className="mb-0 login-btn" />
         </Form>

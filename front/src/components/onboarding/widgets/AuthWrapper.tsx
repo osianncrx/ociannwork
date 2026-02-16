@@ -17,9 +17,9 @@ const AuthWrapper = ({ children, bg = '' }: AuthWrapperProps) => {
           <div className="login-card text-center">
             <div className="logo">
               {onboarding_logo ? (
-                <Image src={onboarding_logo} alt="OciannWork" height={35} />
+                <Image src={onboarding_logo} alt="OciannWork" height={80} />
               ) : (
-                <Image src="/logo/ociannwork-logo.png" alt="OciannWork" height={35} />
+                <Image src="/logo/ociannwork-logo.png" alt="OciannWork" height={80} />
               )}
             </div>
             {children}

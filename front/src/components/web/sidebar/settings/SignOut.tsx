@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { mutations } from '../../../../api'
 import { SvgIcon } from '../../../../shared/icons'
 import { ConfirmModal } from '../../../../shared/modal'
@@ -10,7 +9,6 @@ const SignOut = () => {
   const [, setDropdownOpen] = useState(false)
   const [showLogoutModal, setShowLogoutModal] = useState(false)
   const dispatch = useAppDispatch()
-  const { t } = useTranslation()
   const { mutate: logoutUser, isPending: isLoggingOut } = mutations.useLogout()
 
   const handleLogoutClick = () => {
@@ -36,7 +34,7 @@ const SignOut = () => {
     <>
       <li className="chat-item" onClick={handleLogoutClick}>
         <SvgIcon className="common-svg-hw" iconId="logout" />
-        Sign Out
+        Cerrar Sesión
       </li>
 
       <ConfirmModal
@@ -44,10 +42,10 @@ const SignOut = () => {
         isOpen={showLogoutModal}
         onClose={() => setShowLogoutModal(false)}
         onConfirm={handleLogoutConfirm}
-        title={t('Logout')}
-        subtitle={t('Are you sure you want to logout?')}
-        confirmText={t('Logout')}
-        cancelText={t('Cancel')}
+        title="Cerrar Sesión"
+        subtitle="¿Estás seguro de que quieres cerrar sesión?"
+        confirmText="Cerrar Sesión"
+        cancelText="Cancelar"
         variant="danger"
         iconId="login"
       />

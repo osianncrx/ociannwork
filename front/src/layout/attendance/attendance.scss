@@ -1,0 +1,653 @@
+// Attendance Module - Dark Glassmorphism Theme
+$att-bg-primary: #0a0f1a;
+$att-bg-secondary: #0f172a;
+$att-surface: rgba(15, 23, 42, 0.8);
+$att-surface-hover: rgba(30, 41, 59, 0.8);
+$att-border: rgba(255, 255, 255, 0.1);
+$att-border-hover: rgba(255, 255, 255, 0.2);
+$att-accent: #3b82f6;
+$att-accent-hover: #2563eb;
+$att-text-primary: #f1f5f9;
+$att-text-secondary: #94a3b8;
+$att-text-muted: #64748b;
+$att-success: #10b981;
+$att-warning: #f59e0b;
+$att-danger: #ef4444;
+$att-info: #06b6d4;
+
+// Status colors
+$att-status-working: #10b981;
+$att-status-break: #f59e0b;
+$att-status-done: #6366f1;
+$att-status-none: #64748b;
+
+.attendance-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, $att-bg-primary 0%, $att-bg-secondary 100%);
+  color: $att-text-primary;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.attendance-sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: $att-surface;
+  backdrop-filter: blur(20px);
+  border-right: 1px solid $att-border;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: transform 0.3s ease;
+
+  &__brand {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid $att-border;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    img {
+      height: 32px;
+      width: auto;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $att-text-primary;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    span {
+      font-size: 0.7rem;
+      color: $att-accent;
+      font-weight: 500;
+    }
+  }
+
+  &__nav {
+    flex: 1;
+    padding: 1rem 0.75rem;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+    }
+  }
+
+  &__section {
+    margin-bottom: 1.5rem;
+  }
+
+  &__section-title {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $att-text-muted;
+    padding: 0 0.75rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    color: $att-text-secondary;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background: $att-surface-hover;
+      color: $att-text-primary;
+    }
+
+    &--active {
+      background: rgba(59, 130, 246, 0.15);
+      color: $att-accent;
+
+      .attendance-sidebar__link-icon {
+        color: $att-accent;
+      }
+    }
+
+    &-icon {
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+  }
+
+  &__footer {
+    padding: 1rem 1.25rem;
+    border-top: 1px solid $att-border;
+    font-size: 0.75rem;
+    color: $att-text-muted;
+    text-align: center;
+  }
+
+  @media (max-width: 991px) {
+    transform: translateX(-100%);
+
+    &--open {
+      transform: translateX(0);
+    }
+  }
+}
+
+.attendance-main {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  @media (max-width: 991px) {
+    margin-left: 0;
+  }
+}
+
+.attendance-header {
+  height: 64px;
+  background: $att-surface;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid $att-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: $att-text-primary;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+
+    @media (max-width: 991px) {
+      display: block;
+    }
+  }
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $att-text-primary;
+    margin: 0;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  &__clock {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $att-text-primary;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+
+    &-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: $att-text-primary;
+    }
+
+    &-team {
+      font-size: 0.7rem;
+      color: $att-text-muted;
+    }
+  }
+
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $att-accent, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: white;
+  }
+}
+
+.attendance-content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+// Glass Card
+.att-card {
+  background: $att-surface;
+  backdrop-filter: blur(20px);
+  border: 1px solid $att-border;
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $att-border-hover;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid $att-border;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $att-text-primary;
+    margin: 0;
+  }
+}
+
+// Status Badge
+.att-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  &--working {
+    background: rgba(16, 185, 129, 0.15);
+    color: $att-status-working;
+    &::before { background: $att-status-working; }
+  }
+
+  &--break {
+    background: rgba(245, 158, 11, 0.15);
+    color: $att-status-break;
+    &::before { background: $att-status-break; }
+  }
+
+  &--done {
+    background: rgba(99, 102, 241, 0.15);
+    color: $att-status-done;
+    &::before { background: $att-status-done; }
+  }
+
+  &--none {
+    background: rgba(100, 116, 139, 0.15);
+    color: $att-status-none;
+    &::before { background: $att-status-none; }
+  }
+}
+
+// Time Card (stats)
+.att-time-card {
+  background: $att-surface;
+  backdrop-filter: blur(20px);
+  border: 1px solid $att-border;
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+
+  &__icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $att-text-primary;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 0.25rem;
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    color: $att-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+// Mark Button
+.att-mark-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: white;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.entrada {
+    background: linear-gradient(135deg, $att-success, darken($att-success, 10%));
+    &:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+  }
+
+  &.descanso {
+    background: linear-gradient(135deg, $att-warning, darken($att-warning, 10%));
+    &:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
+  }
+
+  &.salida {
+    background: linear-gradient(135deg, $att-danger, darken($att-danger, 10%));
+    &:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
+  }
+}
+
+// Table
+.att-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  thead th {
+    background: rgba(15, 23, 42, 0.5);
+    color: $att-text-muted;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid $att-border;
+
+    &:first-child { border-radius: 8px 0 0 0; }
+    &:last-child { border-radius: 0 8px 0 0; }
+  }
+
+  tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid $att-border;
+    font-size: 0.85rem;
+    color: $att-text-secondary;
+  }
+
+  tbody tr {
+    transition: background 0.15s ease;
+    &:hover { background: $att-surface-hover; }
+  }
+}
+
+// Buttons
+.att-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+
+  &--primary {
+    background: $att-accent;
+    color: white;
+    &:hover { background: $att-accent-hover; }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $att-text-secondary;
+    border-color: $att-border;
+    &:hover { border-color: $att-border-hover; color: $att-text-primary; }
+  }
+
+  &--success {
+    background: $att-success;
+    color: white;
+    &:hover { background: darken($att-success, 8%); }
+  }
+
+  &--danger {
+    background: $att-danger;
+    color: white;
+    &:hover { background: darken($att-danger, 8%); }
+  }
+
+  &--sm {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.78rem;
+  }
+}
+
+// Form inputs
+.att-input {
+  width: 100%;
+  padding: 0.6rem 0.875rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid $att-border;
+  border-radius: 8px;
+  color: $att-text-primary;
+  font-size: 0.85rem;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $att-accent;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  &::placeholder {
+    color: $att-text-muted;
+  }
+}
+
+.att-select {
+  @extend .att-input;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+
+  option {
+    background: $att-bg-secondary;
+    color: $att-text-primary;
+  }
+}
+
+.att-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: $att-text-secondary;
+  margin-bottom: 0.375rem;
+}
+
+// Modal / Overlay
+.att-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.att-modal {
+  background: $att-bg-secondary;
+  border: 1px solid $att-border;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $att-text-primary;
+    margin: 0;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    color: $att-text-muted;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    &:hover { color: $att-text-primary; }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid $att-border;
+  }
+}
+
+// Overlay for sidebar on mobile
+.attendance-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+
+  @media (max-width: 991px) {
+    &--visible {
+      display: block;
+    }
+  }
+}
+
+// Responsive grid helpers
+.att-grid {
+  display: grid;
+  gap: 1rem;
+
+  &--2 { grid-template-columns: repeat(2, 1fr); }
+  &--3 { grid-template-columns: repeat(3, 1fr); }
+  &--4 { grid-template-columns: repeat(4, 1fr); }
+
+  @media (max-width: 768px) {
+    &--2, &--3, &--4 {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 769px) and (max-width: 1024px) {
+    &--3, &--4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+// Empty state
+.att-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: $att-text-muted;
+
+  &__icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $att-text-secondary;
+    margin-bottom: 0.5rem;
+  }
+
+  &__text {
+    font-size: 0.85rem;
+  }
+}
+
+// Loading spinner for attendance
+.att-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid $att-border;
+  border-top-color: $att-accent;
+  border-radius: 50%;
+  animation: att-spin 0.6s linear infinite;
+}
+
+@keyframes att-spin {
+  to { transform: rotate(360deg); }
+}

@@ -221,13 +221,13 @@ const ChatSection = () => {
     // Check if trying to delete multiple messages when feature is disabled
     // Allow single message deletion, but prevent multiple deletion
     if (selectedMessagesData.length > 1 && !allowsMultipleDelete()) {
-      toaster('error', t('multiple_delete_not_available') || 'Multiple message deletion is not available in your current plan. Please upgrade to enable this feature.')
+      toaster('error', t('multiple_delete_not_available') || 'La eliminación múltiple de mensajes no está disponible en tu plan actual. Actualiza para habilitar esta función.')
       setConfirmDeleteOpen(false)
       return
     }
 
     if (!canDeleteSelected || deletableMessages.length === 0) {
-      toaster('error', t('message_cannot_be_deleted') || 'Message cannot be deleted')
+      toaster('error', t('message_cannot_be_deleted') || 'El mensaje no se puede eliminar')
       setConfirmDeleteOpen(false)
       return
     }
@@ -235,7 +235,7 @@ const ChatSection = () => {
     // If some messages cannot be deleted, show an info message
     if (deletableMessages.length < selectedMessagesData.length) {
       const nonDeletableCount = selectedMessagesData.length - deletableMessages.length
-      toaster('info', `${nonDeletableCount} message(s) cannot be deleted`)
+      toaster('info', `${nonDeletableCount} mensaje(s) no se pueden eliminar`)
     }
 
     setConfirmDeleteOpen(false)
@@ -248,7 +248,7 @@ const ChatSection = () => {
           {
             onSuccess: () => resolve(),
             onError: () => {
-              toaster('error', t('message_cannot_be_deleted') || 'Message cannot be deleted')
+              toaster('error', t('message_cannot_be_deleted') || 'El mensaje no se puede eliminar')
               reject()
             },
           },

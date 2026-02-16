@@ -7,7 +7,7 @@ return(
             <SvgIcon iconId="read-messages" className="read-messages-dis" />
         </div>
         <span className="read-messages">
-            Select a chat to read messages
+            Selecciona un chat para leer los mensajes
         </span>
     </div>
 )

@@ -34,7 +34,7 @@ const LogoutFromAllDevices = () => {
     <>
       <li className="chat-item" onClick={handleLogoutClick}>
         <SvgIcon className="common-svg-hw" iconId="logout" />
-        Logout from all devices
+        Cerrar sesión en todos los dispositivos
       </li>
 
       <ConfirmModal
@@ -42,10 +42,10 @@ const LogoutFromAllDevices = () => {
         isOpen={showLogoutModal}
         onClose={() => setShowLogoutModal(false)}
         onConfirm={handleLogoutConfirm}
-        title={t('Logout from all devices')}
-        subtitle={t('Are you sure you want to logout from all devices? This will end all active sessions on all devices where you are logged in.')}
-        confirmText={t('Logout from all devices')}
-        cancelText={t('Cancel')}
+        title={t('Cerrar sesión en todos los dispositivos')}
+        subtitle={t('¿Estás seguro de que quieres cerrar sesión en todos los dispositivos? Esto finalizará todas las sesiones activas en todos los dispositivos donde estás conectado.')}
+        confirmText={t('Cerrar sesión en todos los dispositivos')}
+        cancelText={t('Cancelar')}
         variant="danger"
         iconId="logout"
       />

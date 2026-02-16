@@ -24,11 +24,11 @@ const StorageLimitModal: FC<StorageLimitModalProps> = ({
     <SimpleModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Storage Limit Reached"
+      title="Límite de Almacenamiento Alcanzado"
       size="md"
       actions={[
         {
-          text: 'I Understand',
+          text: 'Entendido',
           onClick: onClose,
           color: 'primary',
           autoClose: true,
@@ -38,7 +38,7 @@ const StorageLimitModal: FC<StorageLimitModalProps> = ({
       <div className="storage-limit-modal">
         <div className="alert alert-warning mb-3">
           <i className="fa fa-exclamation-triangle me-2" />
-          <strong>Storage limit exceeded!</strong>
+          <strong>¡Límite de almacenamiento excedido!</strong>
         </div>
 
         {message && (
@@ -49,15 +49,15 @@ const StorageLimitModal: FC<StorageLimitModalProps> = ({
           <div className="storage-details">
             <div className="mb-3">
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <span className="text-muted">Current Usage:</span>
+                <span className="text-muted">Uso Actual:</span>
                 <span className="fw-bold">{formatStorage(currentUsageMB)}</span>
               </div>
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <span className="text-muted">Storage Limit:</span>
+                <span className="text-muted">Límite de Almacenamiento:</span>
                 <span className="fw-bold">{formatStorage(maxStorageMB)}</span>
               </div>
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <span className="text-muted">Available:</span>
+                <span className="text-muted">Disponible:</span>
                 <span className="fw-bold text-danger">{formatStorage(availableMB)}</span>
               </div>
               <div className="progress mt-3" style={{ height: '12px' }}>
@@ -72,7 +72,7 @@ const StorageLimitModal: FC<StorageLimitModalProps> = ({
               </div>
               <div className="text-center mt-2">
                 <small className="text-muted">
-                  {usagePercentage.toFixed(1)}% of storage used
+                  {usagePercentage.toFixed(1)}% de almacenamiento usado
                 </small>
               </div>
             </div>
@@ -82,7 +82,7 @@ const StorageLimitModal: FC<StorageLimitModalProps> = ({
         <div className="mt-4">
           <p className="text-muted small mb-0">
             <i className="fa fa-info-circle me-1" />
-            Please contact your team admin to upgrade your plan for more storage.
+            Contacta al admin de tu equipo para actualizar el plan y obtener más almacenamiento.
           </p>
         </div>
       </div>

@@ -50,12 +50,12 @@ const SettingsTab = ({ setDetailModal }: { setDetailModal: (val: boolean) => voi
             <div className="d-flex align-items-center">
               <SvgIcon iconId="trash-icon" className="common-svg-hw me-2 text-danger" />
               <div>
-                <div className="text-danger fw-medium">Delete this channel</div>
-                <small className="text-muted">This action cannot be undone. All messages will be lost.</small>
+                <div className="text-danger fw-medium">Eliminar este canal</div>
+                <small className="text-muted">Esta acción no se puede deshacer. Todos los mensajes se perderán.</small>
               </div>
             </div>
             <button className="btn btn-outline-danger btn-sm" onClick={handleDeleteChannel} disabled={isDeleting}>
-              {isDeleting ? 'Deleting...' : 'Delete Channel'}
+              {isDeleting ? 'Eliminando...' : 'Eliminar Canal'}
             </button>
           </div>
         )}
@@ -65,10 +65,10 @@ const SettingsTab = ({ setDetailModal }: { setDetailModal: (val: boolean) => voi
         isOpen={confirmDeleteOpen}
         onClose={() => setConfirmDeleteOpen(false)}
         onConfirm={confirmDelete}
-        title="Are you sure you want to delete this channel?"
-        subtitle="This action cannot be undone. All messages, files, and channel history will be permanently deleted."
-        confirmText="Delete"
-        cancelText="Cancel"
+        title="¿Estás seguro de que quieres eliminar este canal?"
+        subtitle="Esta acción no se puede deshacer. Todos los mensajes, archivos e historial del canal se eliminarán permanentemente."
+        confirmText="Eliminar"
+        cancelText="Cancelar"
         variant="danger"
         showIcon={true}
         iconId="trash-icon"

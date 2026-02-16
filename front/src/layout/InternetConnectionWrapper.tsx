@@ -19,9 +19,9 @@ const InternetConnectionWrapper = ({ children }: InternetConnectionWrapperProps)
         <div className="text-center">
           <div className="main-loader">
             {loading_logo || public_loading_logo ? (
-              <Image src={loading_logo || public_loading_logo} alt="OciannWork" height={35} />
+              <Image src={loading_logo || public_loading_logo} alt="OciannWork" height={80} />
             ) : (
-              <Image src="/logo/ociannwork-logo.png" alt="OciannWork" height={35} />
+              <Image src="/logo/ociannwork-logo.png" alt="OciannWork" height={80} />
             )}
             <p>Simple, secure messaging for fast moving teams...!</p>
           </div>

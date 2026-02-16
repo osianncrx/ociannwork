@@ -18,12 +18,12 @@ const Settings = () => {
 
   return (
     <div className="setting-list">
-      <h6>Settings</h6>
+      <h6>Configuración</h6>
       <ul className="chat-list">
         {isTeamAdmin && (
           <li className="chat-item" onClick={redirectToTeamAdmin}>
             <SvgIcon className="common-svg-hw" iconId="administration" />
-            Team Administration
+            Administración del Equipo
           </li>
         )}
         <EditProfile />
@@ -33,7 +33,7 @@ const Settings = () => {
         <Shortcuts />
         <li className="chat-item">
           <SvgIcon className="common-svg-hw version" iconId="version" />
-          Version
+          Versión
           <span className="d-flex justify-content-end flex-grow-1 text-secondary me-1">1.0.0</span>
         </li>
         <SignOut />

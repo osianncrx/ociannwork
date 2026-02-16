@@ -69,7 +69,7 @@ const CreateChannel: FC<CreateChannelProps> = ({ createChannelModal, setCreateCh
     <SimpleModal
       isOpen={createChannelModal}
       onClose={() => setCreateChannelModal(false)}
-      title="Create a New Channel"
+      title="Crear un Nuevo Canal"
       size="md"
     >
       <Formik
@@ -90,10 +90,10 @@ const CreateChannel: FC<CreateChannelProps> = ({ createChannelModal, setCreateCh
               <Col xs={12}>
                 <TextInput
                   layout="vertical"
-                  label="Channel Name"
+                  label="Nombre del Canal"
                   name="name"
                   type="text"
-                  placeholder="Dev squad, kudos corner, design hub, etc..."
+                  placeholder="Equipo dev, rincón de logros, hub de diseño, etc..."
                   className="custom-input"
                 />
               </Col>
@@ -101,10 +101,10 @@ const CreateChannel: FC<CreateChannelProps> = ({ createChannelModal, setCreateCh
               <Col xs={12}>
                 <TextInput
                   layout="vertical"
-                  label="Description"
+                  label="Descripción"
                   name="description"
                   type="textarea"
-                  placeholder="Enter a short description for your channel"
+                  placeholder="Ingresa una descripción corta para tu canal"
                   className="custom-input"
                 />
               </Col>
@@ -112,9 +112,9 @@ const CreateChannel: FC<CreateChannelProps> = ({ createChannelModal, setCreateCh
               <Col xs={12}>
                 <UserChannelSelector
                   layout="vertical"
-                  label="Members"
+                  label="Miembros"
                   name="members"
-                  placeholder="Select members..."
+                  placeholder="Seleccionar miembros..."
                   isMulti={true}
                   includeUsers={true}
                   includeChannels={false}
@@ -136,11 +136,11 @@ const CreateChannel: FC<CreateChannelProps> = ({ createChannelModal, setCreateCh
                   label="channel_type"
                   name="type"
                   options={[
-                    { label: 'Public', value: 'public' },
-                    { label: 'Private', value: 'private' },
+                    { label: 'Público', value: 'public' },
+                    { label: 'Privado', value: 'private' },
                   ]}
                   value={{
-                    label: values.type === 'public' ? 'Public' : 'Private',
+                    label: values.type === 'public' ? 'Público' : 'Privado',
                     value: values.type,
                   }}
                   onOptionChange={(option: any) => {
@@ -154,7 +154,7 @@ const CreateChannel: FC<CreateChannelProps> = ({ createChannelModal, setCreateCh
 
               <Col xs={12}>
                 <SolidButton
-                  title="Submit"
+                  title="Crear"
                   loading={isPending}
                   type="submit"
                   color="primary"

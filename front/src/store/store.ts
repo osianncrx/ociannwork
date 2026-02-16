@@ -14,6 +14,8 @@ import settingSlice from './slices/settingSlice'
 import publicSettingSlice from './slices/publicSettingSlice'
 import subscriptionSlice from './slices/subscriptionSlice'
 import messageSelectionSlice from './slices/messageSelectionSlice'
+import virtualOfficeSlice from './slices/virtualOfficeSlice'
+import attendanceSlice from './slices/attendanceSlice'
 
 
 const Store = configureStore({
@@ -33,7 +35,8 @@ const Store = configureStore({
     publicSetting: publicSettingSlice,
     subscription: subscriptionSlice,
     messageSelection: messageSelectionSlice,
-
+    virtualOffice: virtualOfficeSlice,
+    attendance: attendanceSlice,
   },
 })
 

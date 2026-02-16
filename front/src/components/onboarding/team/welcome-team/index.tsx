@@ -33,14 +33,14 @@ const WelcomeTeam = () => {
                 <Image
                   src={mixBackgroundLayout == 'light' ? logo_light_url : logo_dark_url}
                   alt="OciannWork"
-                  height={35}
+                  height={80}
                 />
               ) : (
-                <Image src="/logo/ociannwork-logo.png" alt="OciannWork" height={35} />
+                <Image src="/logo/ociannwork-logo.png" alt="OciannWork" height={80} />
               )}
             </div>
             <div className="content-title">
-              <h1>{t('great_to_see_you')} - welcome!</h1>
+              <h1>{t('great_to_see_you')}</h1>
             </div>
             <p className="w-100">{t('choose_a_team_below_to_get_back_to_working_with_your_team')}</p>
             <p className="mb-2">
@@ -57,9 +57,9 @@ const WelcomeTeam = () => {
               </div>
             </span>
             <span className="bottom-footer">
-              Want to add or join new team?
+              ¿Quieres agregar o unirte a otro equipo?
               <div className="link-text ms-1" onClick={handleJoinAddTeam}>
-                {t('Add or Join')}
+                Agregar o Unirse
               </div>
             </span>
           </div>

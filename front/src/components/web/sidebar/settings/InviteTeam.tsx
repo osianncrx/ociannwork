@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { SvgIcon } from '../../../../shared/icons'
 import { useTeamPermissions } from '../../../../utils/hooks'
 import InviteMembersModal from './InviteMembersModal'
@@ -7,13 +6,12 @@ import InviteMembersModal from './InviteMembersModal'
 const InviteTeam = () => {
   const [inviteMembersModal, setInviteMembersModal] = useState(false)
   const [, setDropdownOpen] = useState(false)
-  const { t } = useTranslation()
   const { checkPermission } = useTeamPermissions()
 
   const handleInviteMembersClick = () => {
     const hasPermission = checkPermission('invite_member', {
-      title: t('Permission Required'),
-      content: t('Only admins can invite new members to the team.'),
+      title: 'Permiso Requerido',
+      content: 'Solo los admins pueden invitar nuevos miembros al equipo.',
       variant: 'warning',
     })
 
@@ -27,7 +25,7 @@ const InviteTeam = () => {
     <>
       <li className="chat-item" onClick={handleInviteMembersClick}>
         <SvgIcon className="common-svg-hw dnd" iconId="invite-team" />
-        Invite Team
+        Invitar al Equipo
       </li>
       <InviteMembersModal isOpen={inviteMembersModal} toggle={() => setInviteMembersModal(false)} />
     </>

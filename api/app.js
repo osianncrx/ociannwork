@@ -194,6 +194,19 @@ module.exports = (async () => {
     const e2eRoutes = require('./routes/e2e.routes');
     const impersonationRoutes = require("./routes/impersonation.routes");
     const recordingRoutes = require('./routes/recording.routes');
+    const driveRoutes = require('./routes/drive.routes');
+
+    // Attendance module routes
+    const attendanceRoutes = require('./routes/attendance.routes');
+    const attendanceEditRoutes = require('./routes/attendance-edit.routes');
+    const attendanceStatusRoutes = require('./routes/attendance-status.routes');
+    const attendanceProjectRoutes = require('./routes/attendance-projects.routes');
+    const attendanceOvertimeRoutes = require('./routes/attendance-overtime.routes');
+    const attendanceReportRoutes = require('./routes/attendance-reports.routes');
+    const attendanceHolidayRoutes = require('./routes/attendance-holidays.routes');
+    const attendanceCompanyRoutes = require('./routes/attendance-companies.routes');
+    const attendanceUserRoutes = require('./routes/attendance-users.routes');
+    const attendanceTeamsRoutes = require('./routes/attendance-teams.routes');
 
     // Mount routes
     app.use('/api/auth', authRoutes);
@@ -215,6 +228,19 @@ module.exports = (async () => {
     app.use('/api/e2e', e2eRoutes);
     app.use("/api/impersonation", impersonationRoutes);
     app.use('/api/recordings', recordingRoutes);
+    app.use('/api/drive', driveRoutes);
+
+    // Attendance module routes
+    app.use('/api/attendance/marks', attendanceRoutes);
+    app.use('/api/attendance/marks/edit', attendanceEditRoutes);
+    app.use('/api/attendance/status', attendanceStatusRoutes);
+    app.use('/api/attendance/projects', attendanceProjectRoutes);
+    app.use('/api/attendance/overtime', attendanceOvertimeRoutes);
+    app.use('/api/attendance/reports', attendanceReportRoutes);
+    app.use('/api/attendance/holidays', attendanceHolidayRoutes);
+    app.use('/api/attendance/companies', attendanceCompanyRoutes);
+    app.use('/api/attendance/users', attendanceUserRoutes);
+    app.use('/api/attendance/teams-integration', attendanceTeamsRoutes);
 
     // 404 handler
     app.use((req, res) => {

@@ -20,6 +20,19 @@ module.exports = function initSockets(io) {
   const activeScreenShares = new Map();
   const activeCalls = new Map();
   const userCalls = new Map();
+  const activeRemoteControls = new Map(); // callId -> { controllerId, targetId }
+
+  // Virtual Office: track which users are in which rooms
+  // voRooms: Map<roomId, Map<userId, { id, name, first_name, last_name, avatar, profile_color, status }>>
+  const voRooms = new Map();
+  const voUserRoom = new Map(); // Map<userId, roomId> - which room each user is in
+
+  // Initialize default rooms
+  const defaultVORooms = [
+    'desarrolladores', 'gerencia', 'descanso', 'sala-1',
+    'sala-2', 'comercial', 'inactivos', 'legal-docente'
+  ];
+  defaultVORooms.forEach(roomId => voRooms.set(roomId, new Map()));
 
   const fixMetadata = (meta) => {
     if (typeof meta === "string") {
@@ -1102,6 +1115,18 @@ module.exports = function initSockets(io) {
         });
       }
 
+      // Clean up remote control if participant was involved
+      const rc = activeRemoteControls.get(callId);
+      if (rc && (rc.controllerId === userId || rc.targetId === userId)) {
+        activeRemoteControls.delete(callId);
+        call.participants.forEach((participant) => {
+          io.to(`user_${participant.userId}`).emit(
+            "remote-control-stopped",
+            { callId, userId }
+          );
+        });
+      }
+
       const shouldEndCall = call.participants.size < 2;
 
       if (shouldEndCall) {
@@ -1702,6 +1727,24 @@ module.exports = function initSockets(io) {
       });
     });
 
+    // ========== Attendance Module Socket Events ==========
+
+    // Join attendance team room for real-time updates
+    socket.on("attendance:join-team", (teamId) => {
+      if (teamId) {
+        socket.join(`team-${teamId}`);
+      }
+    });
+
+    // Leave attendance team room
+    socket.on("attendance:leave-team", (teamId) => {
+      if (teamId) {
+        socket.leave(`team-${teamId}`);
+      }
+    });
+
+    // ========== End Attendance Module ==========
+
     socket.on("disconnect", async () => {
       const userId = socketUsers.get(socket.id);
       if (!userId) {
@@ -1748,6 +1791,17 @@ module.exports = function initSockets(io) {
                   callId,
                   userId,
                 }
+              );
+            });
+          }
+          // Clean up remote control on disconnect
+          const rcDisconnect = activeRemoteControls.get(callId);
+          if (rcDisconnect && (rcDisconnect.controllerId === userId || rcDisconnect.targetId === userId)) {
+            activeRemoteControls.delete(callId);
+            call.participants.forEach((participant) => {
+              io.to(`user_${participant.userId}`).emit(
+                "remote-control-stopped",
+                { callId, userId }
               );
             });
           }
@@ -2039,6 +2093,18 @@ module.exports = function initSockets(io) {
         activeScreenShares.delete(callId);
       }
 
+      // Stop remote control if screen sharer was being controlled
+      const rcStop = activeRemoteControls.get(callId);
+      if (rcStop && rcStop.targetId === userId) {
+        activeRemoteControls.delete(callId);
+        call.participants.forEach((p) => {
+          io.to(`user_${p.userId}`).emit("remote-control-stopped", {
+            callId,
+            userId,
+          });
+        });
+      }
+
       const participant = call.participants.get(userId);
       if (participant) {
         participant.isScreenSharing = false;
@@ -2059,5 +2125,281 @@ module.exports = function initSockets(io) {
 
       console.log(`User ${userId} stopped screen sharing in call ${callId}`);
     });
+
+    // ============================================================
+    // REMOTE CONTROL EVENTS
+    // ============================================================
+
+    socket.on("request-remote-control", (data) => {
+      const { callId, targetUserId } = data;
+      const userId = socket.userId;
+      const call = activeCalls.get(callId);
+
+      if (!call) {
+        console.log(`[RC] Call ${callId} not found for remote control request`);
+        return;
+      }
+
+      const targetParticipant = call.participants.get(targetUserId);
+      if (!targetParticipant || !targetParticipant.isScreenSharing) {
+        console.log(`[RC] Target ${targetUserId} not sharing screen`);
+        return;
+      }
+
+      const existing = activeRemoteControls.get(callId);
+      if (existing) {
+        console.log(`[RC] Remote control already active in call ${callId}`);
+        return;
+      }
+
+      const requester = call.participants.get(userId);
+      const requesterName = requester ? requester.name : "Unknown";
+
+      io.to(`user_${targetUserId}`).emit("remote-control-request", {
+        callId,
+        requesterId: userId,
+        requesterName,
+      });
+
+      console.log(`[RC] User ${userId} requested remote control of ${targetUserId} in call ${callId}`);
+    });
+
+    socket.on("accept-remote-control", (data) => {
+      const { callId, requesterId } = data;
+      const userId = socket.userId;
+      const call = activeCalls.get(callId);
+
+      if (!call) {
+        console.log(`[RC] Call ${callId} not found for remote control accept`);
+        return;
+      }
+
+      activeRemoteControls.set(callId, {
+        controllerId: requesterId,
+        targetId: userId,
+      });
+
+      io.to(`user_${requesterId}`).emit("remote-control-accepted", {
+        callId,
+        targetUserId: userId,
+      });
+
+      console.log(`[RC] User ${userId} accepted remote control from ${requesterId} in call ${callId}`);
+    });
+
+    socket.on("deny-remote-control", (data) => {
+      const { callId, requesterId } = data;
+      const userId = socket.userId;
+      const call = activeCalls.get(callId);
+
+      if (!call) return;
+
+      io.to(`user_${requesterId}`).emit("remote-control-denied", {
+        callId,
+        targetUserId: userId,
+      });
+
+      console.log(`[RC] User ${userId} denied remote control from ${requesterId} in call ${callId}`);
+    });
+
+    socket.on("stop-remote-control", (data) => {
+      const { callId } = data;
+      const userId = socket.userId;
+      const call = activeCalls.get(callId);
+
+      if (!call) return;
+
+      const rc = activeRemoteControls.get(callId);
+      if (!rc) return;
+
+      activeRemoteControls.delete(callId);
+
+      call.participants.forEach((participant) => {
+        if (participant.userId !== userId) {
+          io.to(`user_${participant.userId}`).emit("remote-control-stopped", {
+            callId,
+            userId,
+          });
+        }
+      });
+
+      console.log(`[RC] Remote control stopped by ${userId} in call ${callId}`);
+    });
+
+    // ============================================================
+    // VIRTUAL OFFICE EVENTS
+    // ============================================================
+
+    // Helper: build user data object from DB user record
+    const buildVOUserData = (dbUser) => ({
+      id: String(dbUser.id),
+      name: dbUser.name || "Usuario",
+      first_name: dbUser.name || "",
+      last_name: "",
+      avatar: dbUser.avatar || null,
+      profile_color: (dbUser.profile_color && dbUser.profile_color !== "0") ? dbUser.profile_color : "#5579F8",
+      status: dbUser.is_online ? (dbUser.is_away ? "away" : "online") : "offline",
+    });
+
+    // Get current state of all rooms - includes ALL online team users
+    socket.on("vo:get-rooms", async () => {
+      try {
+        // Fetch ALL users who are online from the database
+        const onlineUsers = await User.findAll({
+          where: { is_online: true },
+          attributes: ["id", "name", "avatar", "profile_color", "is_online", "is_away"],
+        });
+
+        // Ensure all online users that are NOT yet in a room get placed in "inactivos"
+        for (const dbUser of onlineUsers) {
+          const uid = dbUser.id;
+          if (!voUserRoom.has(uid)) {
+            const userData = buildVOUserData(dbUser);
+            voUserRoom.set(uid, "inactivos");
+            if (voRooms.has("inactivos")) {
+              voRooms.get("inactivos").set(uid, userData);
+            }
+          } else {
+            // Update user data in their current room (name, avatar may have changed)
+            const currentRoom = voUserRoom.get(uid);
+            if (voRooms.has(currentRoom)) {
+              const userData = buildVOUserData(dbUser);
+              voRooms.get(currentRoom).set(uid, userData);
+            }
+          }
+        }
+
+        // Remove users who are no longer online from all rooms
+        for (const [roomId, usersMap] of voRooms.entries()) {
+          for (const [uid] of usersMap.entries()) {
+            const isStillOnline = onlineUsers.some(u => u.id == uid);
+            if (!isStillOnline) {
+              usersMap.delete(uid);
+              voUserRoom.delete(uid);
+            }
+          }
+        }
+
+        // Build response
+        const roomsState = [];
+        for (const [roomId, usersMap] of voRooms.entries()) {
+          roomsState.push({
+            roomId,
+            users: Array.from(usersMap.values()),
+          });
+        }
+
+        socket.emit("vo:rooms-state", roomsState);
+        console.log(`[VO] Sent rooms state to user ${socket.userId}: ${onlineUsers.length} online users`);
+      } catch (error) {
+        console.error("[VO] Error getting rooms state:", error);
+        // Send empty rooms state as fallback
+        const roomsState = [];
+        for (const [roomId, usersMap] of voRooms.entries()) {
+          roomsState.push({ roomId, users: Array.from(usersMap.values()) });
+        }
+        socket.emit("vo:rooms-state", roomsState);
+      }
+    });
+
+    // User joins a virtual office room
+    socket.on("vo:join-room", async (data) => {
+      const userId = socket.userId;
+      if (!userId || !data?.roomId) return;
+
+      const roomId = data.roomId;
+      if (!voRooms.has(roomId)) {
+        console.log(`[VO] Room ${roomId} not found`);
+        return;
+      }
+
+      // Leave current room first
+      const currentRoom = voUserRoom.get(userId);
+      if (currentRoom && currentRoom !== roomId) {
+        const oldRoom = voRooms.get(currentRoom);
+        if (oldRoom) {
+          oldRoom.delete(userId);
+          io.emit("vo:user-left-room", { roomId: currentRoom, userId: String(userId) });
+        }
+      }
+
+      // Fetch user info from DB
+      try {
+        const dbUser = await User.findByPk(userId, {
+          attributes: ["id", "name", "avatar", "profile_color", "is_online", "is_away"],
+        });
+        if (!dbUser) return;
+
+        const userData = buildVOUserData(dbUser);
+
+        // Add user to new room
+        voRooms.get(roomId).set(userId, userData);
+        voUserRoom.set(userId, roomId);
+
+        // Broadcast to everyone
+        io.emit("vo:user-joined-room", { roomId, user: userData });
+        console.log(`[VO] User ${userId} (${userData.name}) joined room ${roomId}`);
+      } catch (error) {
+        console.error(`[VO] Error joining room:`, error);
+      }
+    });
+
+    // User leaves a virtual office room
+    socket.on("vo:leave-room", (data) => {
+      const userId = socket.userId;
+      if (!userId || !data?.roomId) return;
+
+      const roomId = data.roomId;
+      const room = voRooms.get(roomId);
+      if (room) {
+        room.delete(userId);
+      }
+      voUserRoom.delete(userId);
+
+      io.emit("vo:user-left-room", { roomId, userId: String(userId) });
+      console.log(`[VO] User ${userId} left room ${roomId}`);
+    });
+
+    // Quick message from virtual office
+    socket.on("vo:send-quick-message", (data) => {
+      const userId = socket.userId;
+      if (!userId || !data?.targetUserId) return;
+
+      const { targetUserId, content, type, senderName } = data;
+
+      io.to(`user_${targetUserId}`).emit("vo:quick-message-received", {
+        senderId: String(userId),
+        senderName: senderName || "Usuario",
+        content,
+        type,
+        timestamp: new Date().toISOString(),
+      });
+
+      console.log(`[VO] Quick message from ${userId} to ${targetUserId} (${type})`);
+    });
+
+    // Clean up virtual office on disconnect
+    socket.on("disconnect", () => {
+      const userId = socket.userId;
+      if (!userId) return;
+
+      // Only remove from VO if user has no other sockets
+      const remainingSockets = userSockets.get(userId);
+      const hasOtherSockets = remainingSockets && remainingSockets.size > 0;
+
+      if (!hasOtherSockets) {
+        const currentRoom = voUserRoom.get(userId);
+        if (currentRoom) {
+          const room = voRooms.get(currentRoom);
+          if (room) {
+            room.delete(userId);
+          }
+          voUserRoom.delete(userId);
+          io.emit("vo:user-left-room", { roomId: currentRoom, userId: String(userId) });
+          console.log(`[VO] User ${userId} disconnected, removed from room ${currentRoom}`);
+        }
+      }
+    });
+
   });
 };

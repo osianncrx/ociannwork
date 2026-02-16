@@ -21,6 +21,17 @@ export interface CallParticipant {
   screenShareStream?: MediaStream
 }
 
+export interface RemoteControlState {
+  isActive: boolean
+  targetUserId: string | null
+  controllerUserId: string | null
+  isDesktopAgentConnected: boolean
+  pendingRequestFrom: string | null
+  pendingRequestName: string | null
+  screenWidth: number
+  screenHeight: number
+}
+
 export interface CallState {
   callId: string | null
   isInCall: boolean
@@ -39,6 +50,7 @@ export interface CallState {
   individualJoinTime?: Date | null
   callStatus: 'idle' | 'calling' | 'ringing' | 'connected' | 'ended' | 'ongoing' | 'missed' | 'no_answer'
   targetBusy: boolean
+  remoteControl: RemoteControlState
   waitingIncoming: {
     callId: string
     chatId: string
@@ -52,6 +64,17 @@ export interface CallState {
       profile_color: string
     }
   } | null
+}
+
+const initialRemoteControlState: RemoteControlState = {
+  isActive: false,
+  targetUserId: null,
+  controllerUserId: null,
+  isDesktopAgentConnected: false,
+  pendingRequestFrom: null,
+  pendingRequestName: null,
+  screenWidth: 0,
+  screenHeight: 0,
 }
 
 const initialCallState: CallState = {
@@ -71,6 +94,7 @@ const initialCallState: CallState = {
   callStartTime: null,
   callStatus: 'idle',
   targetBusy: false,
+  remoteControl: { ...initialRemoteControlState },
   waitingIncoming: null,
 }
 
@@ -114,6 +138,12 @@ class WebRTCService {
   private keyExchangeCompleted: Map<string, boolean> = new Map()
   private recordingStarted = false
   private currentTeamId: string | number | null = null
+
+  // Remote control
+  private dataChannels: Map<string, RTCDataChannel> = new Map()
+  private desktopAgentWs: WebSocket | null = null
+  private remoteControlCallbacks: Set<(state: RemoteControlState) => void> = new Set()
+  private static readonly AGENT_WS_URL = 'ws://127.0.0.1:19876'
 
   constructor() {
     this.setupSocketListeners()
@@ -169,6 +199,19 @@ class WebRTCService {
 
   getCallState(): CallState {
     return { ...this.callState }
+  }
+
+  getRemoteControlState(): RemoteControlState {
+    return { ...this.callState.remoteControl }
+  }
+
+  onRemoteControlChange(callback: (state: RemoteControlState) => void) {
+    this.remoteControlCallbacks.add(callback)
+    return () => this.remoteControlCallbacks.delete(callback)
+  }
+
+  private notifyRemoteControlChange() {
+    this.remoteControlCallbacks.forEach((cb) => cb({ ...this.callState.remoteControl }))
   }
 
   isInCall(): boolean {
@@ -599,6 +642,9 @@ class WebRTCService {
   }
 
   async endCall(): Promise<void> {
+  // Stop remote control before cleanup
+  this.cleanupRemoteControl()
+
   // Stop recording before cleanup
   if (this.recordingStarted) {
     recordingService.stopRecording()
@@ -823,6 +869,11 @@ class WebRTCService {
   async stopScreenShare(originalStream?: MediaStream | null): Promise<void> {
     if (!this.callState.isScreenSharing) return
 
+    // Stop remote control when screen share stops
+    if (this.callState.remoteControl.isActive) {
+      this.stopRemoteControl()
+    }
+
     try {
       if (this.callState.screenShareStream) {
         this.callState.screenShareStream.getTracks().forEach((track) => track.stop())
@@ -915,6 +966,257 @@ class WebRTCService {
       this.callState.isScreenSharing = false
       this.notifyStateChange()
     }
+  }
+
+  // ============================================================
+  // REMOTE CONTROL METHODS
+  // ============================================================
+
+  async requestRemoteControl(targetUserId: string): Promise<void> {
+    if (!this.callState.isInCall || !this.callState.callId) return
+    socket.emit('request-remote-control', {
+      callId: this.callState.callId,
+      targetUserId,
+    })
+  }
+
+  async acceptRemoteControl(requesterId: string): Promise<void> {
+    if (!this.callState.isInCall || !this.callState.callId) return
+
+    const agentConnected = await this.connectToDesktopAgent()
+    if (!agentConnected) {
+      toaster('error', 'Desktop agent not running. Install and start the OciannWork Remote Agent.')
+      this.denyRemoteControl(requesterId)
+      return
+    }
+
+    socket.emit('accept-remote-control', {
+      callId: this.callState.callId,
+      requesterId,
+    })
+
+    this.callState.remoteControl = {
+      ...this.callState.remoteControl,
+      isActive: true,
+      controllerUserId: requesterId,
+      targetUserId: null,
+      pendingRequestFrom: null,
+      pendingRequestName: null,
+    }
+
+    const dc = this.dataChannels.get(requesterId)
+    if (dc && dc.readyState === 'open') {
+      dc.send(JSON.stringify({
+        type: 'rc-agent-ready',
+        screenWidth: this.callState.remoteControl.screenWidth,
+        screenHeight: this.callState.remoteControl.screenHeight,
+      }))
+    }
+
+    this.notifyStateChange()
+    this.notifyRemoteControlChange()
+  }
+
+  denyRemoteControl(requesterId: string): void {
+    if (!this.callState.callId) return
+    socket.emit('deny-remote-control', {
+      callId: this.callState.callId,
+      requesterId,
+    })
+    this.callState.remoteControl.pendingRequestFrom = null
+    this.callState.remoteControl.pendingRequestName = null
+    this.notifyStateChange()
+    this.notifyRemoteControlChange()
+  }
+
+  stopRemoteControl(): void {
+    if (!this.callState.callId) return
+
+    const wasTarget = this.callState.remoteControl.controllerUserId !== null
+
+    socket.emit('stop-remote-control', {
+      callId: this.callState.callId,
+    })
+
+    if (wasTarget) {
+      this.disconnectDesktopAgent()
+    }
+
+    this.callState.remoteControl = { ...initialRemoteControlState }
+    this.notifyStateChange()
+    this.notifyRemoteControlChange()
+  }
+
+  sendInputEvent(event: Record<string, unknown>): void {
+    const targetUserId = this.callState.remoteControl.targetUserId
+    if (!targetUserId || !this.callState.remoteControl.isActive) return
+
+    const dc = this.dataChannels.get(targetUserId)
+    if (dc && dc.readyState === 'open') {
+      dc.send(JSON.stringify({ type: 'rc-input', ...event }))
+    }
+  }
+
+  private handleDataChannelMessage(_fromUserId: string, data: string): void {
+    try {
+      const msg = JSON.parse(data)
+
+      switch (msg.type) {
+        case 'rc-agent-ready':
+          this.callState.remoteControl.screenWidth = msg.screenWidth || 1920
+          this.callState.remoteControl.screenHeight = msg.screenHeight || 1080
+          this.callState.remoteControl.isActive = true
+          this.notifyStateChange()
+          this.notifyRemoteControlChange()
+          break
+
+        case 'rc-input':
+          this.forwardInputToAgent(msg)
+          break
+
+        case 'rc-stopped':
+          this.callState.remoteControl = { ...initialRemoteControlState }
+          this.notifyStateChange()
+          this.notifyRemoteControlChange()
+          toaster('info', 'Remote control session ended')
+          break
+      }
+    } catch (err) {
+      console.error('[RC] Error parsing data channel message:', err)
+    }
+  }
+
+  private async connectToDesktopAgent(): Promise<boolean> {
+    if (this.desktopAgentWs && this.desktopAgentWs.readyState === WebSocket.OPEN) {
+      return true
+    }
+
+    return new Promise<boolean>((resolve) => {
+      try {
+        const ws = new WebSocket(WebRTCService.AGENT_WS_URL)
+        const timeout = setTimeout(() => {
+          ws.close()
+          resolve(false)
+        }, 3000)
+
+        ws.onopen = () => {
+          clearTimeout(timeout)
+          this.desktopAgentWs = ws
+          this.callState.remoteControl.isDesktopAgentConnected = true
+
+          ws.send(JSON.stringify({ type: 'screen-info' }))
+          ws.send(JSON.stringify({ type: 'start-control' }))
+
+          this.notifyRemoteControlChange()
+          resolve(true)
+        }
+
+        ws.onmessage = (event) => {
+          try {
+            const msg = JSON.parse(event.data)
+            if (msg.type === 'screen-info') {
+              this.callState.remoteControl.screenWidth = msg.width || 1920
+              this.callState.remoteControl.screenHeight = msg.height || 1080
+              this.notifyRemoteControlChange()
+            }
+          } catch {
+            // ignore parse errors
+          }
+        }
+
+        ws.onclose = () => {
+          this.desktopAgentWs = null
+          this.callState.remoteControl.isDesktopAgentConnected = false
+          this.notifyRemoteControlChange()
+        }
+
+        ws.onerror = () => {
+          clearTimeout(timeout)
+          this.callState.remoteControl.isDesktopAgentConnected = false
+          this.notifyRemoteControlChange()
+          resolve(false)
+        }
+      } catch {
+        resolve(false)
+      }
+    })
+  }
+
+  private disconnectDesktopAgent(): void {
+    if (this.desktopAgentWs) {
+      try {
+        this.desktopAgentWs.send(JSON.stringify({ type: 'stop-control' }))
+        this.desktopAgentWs.close()
+      } catch {
+        // ignore close errors
+      }
+      this.desktopAgentWs = null
+      this.callState.remoteControl.isDesktopAgentConnected = false
+    }
+  }
+
+  private forwardInputToAgent(msg: Record<string, unknown>): void {
+    if (!this.desktopAgentWs || this.desktopAgentWs.readyState !== WebSocket.OPEN) return
+    if (!this.callState.remoteControl.isActive) return
+
+    const { type: _rcType, ...inputData } = msg
+    this.desktopAgentWs.send(JSON.stringify(inputData))
+  }
+
+  async checkDesktopAgentAvailable(): Promise<boolean> {
+    return new Promise<boolean>((resolve) => {
+      try {
+        const ws = new WebSocket(WebRTCService.AGENT_WS_URL)
+        const timeout = setTimeout(() => {
+          ws.close()
+          resolve(false)
+        }, 2000)
+
+        ws.onopen = () => {
+          clearTimeout(timeout)
+          ws.send(JSON.stringify({ type: 'ping' }))
+        }
+
+        ws.onmessage = (event) => {
+          try {
+            const msg = JSON.parse(event.data)
+            if (msg.type === 'pong') {
+              ws.close()
+              resolve(true)
+            }
+          } catch {
+            ws.close()
+            resolve(false)
+          }
+        }
+
+        ws.onerror = () => {
+          clearTimeout(timeout)
+          resolve(false)
+        }
+      } catch {
+        resolve(false)
+      }
+    })
+  }
+
+  private cleanupRemoteControl(): void {
+    if (this.callState.remoteControl.isActive) {
+      const controllerUserId = this.callState.remoteControl.controllerUserId
+      if (controllerUserId) {
+        const dc = this.dataChannels.get(controllerUserId)
+        if (dc && dc.readyState === 'open') {
+          dc.send(JSON.stringify({ type: 'rc-stopped' }))
+        }
+      }
+      this.disconnectDesktopAgent()
+    }
+
+    this.dataChannels.forEach((dc) => {
+      try { dc.close() } catch { /* ignore */ }
+    })
+    this.dataChannels.clear()
+    this.callState.remoteControl = { ...initialRemoteControlState }
   }
 
   private async getUserMedia(includeVideo: boolean): Promise<MediaStream | null> {
@@ -1124,6 +1426,32 @@ class WebRTCService {
     // Setup e2e encryption if enabled
     if (this.isE2EEnabled() && this.callEncryptionKeyId) {
       this.setupEncryptionForPeerConnection(pc, userId)
+    }
+
+    // Setup data channel for remote control
+    const dc = pc.createDataChannel('remote-control', {
+      ordered: true,
+      maxRetransmits: 3,
+    })
+    dc.onopen = () => console.log(`[RC] DataChannel opened with ${userId}`)
+    dc.onclose = () => {
+      console.log(`[RC] DataChannel closed with ${userId}`)
+      this.dataChannels.delete(userId)
+    }
+    dc.onmessage = (event) => this.handleDataChannelMessage(userId, event.data)
+    this.dataChannels.set(userId, dc)
+
+    pc.ondatachannel = (event) => {
+      const incomingDc = event.channel
+      if (incomingDc.label === 'remote-control') {
+        incomingDc.onopen = () => console.log(`[RC] Incoming DataChannel opened from ${userId}`)
+        incomingDc.onclose = () => {
+          console.log(`[RC] Incoming DataChannel closed from ${userId}`)
+          this.dataChannels.delete(userId)
+        }
+        incomingDc.onmessage = (evt) => this.handleDataChannelMessage(userId, evt.data)
+        this.dataChannels.set(userId, incomingDc)
+      }
     }
 
     this.peerConnections.set(userId, pc)
@@ -1717,6 +2045,49 @@ class WebRTCService {
           participant.isScreenSharing = false
           this.callState.participants.set(userId, participant)
         }
+      }
+    })
+
+    // Remote Control Listeners
+    socket.on('remote-control-request', (data: { callId: string; requesterId: string; requesterName: string }) => {
+      if (this.callState.callId === data.callId && this.callState.isScreenSharing) {
+        this.callState.remoteControl.pendingRequestFrom = data.requesterId
+        this.callState.remoteControl.pendingRequestName = data.requesterName
+        this.notifyStateChange()
+        this.notifyRemoteControlChange()
+      }
+    })
+
+    socket.on('remote-control-accepted', (data: { callId: string; targetUserId: string; screenWidth?: number; screenHeight?: number }) => {
+      if (this.callState.callId === data.callId) {
+        this.callState.remoteControl.targetUserId = data.targetUserId
+        this.callState.remoteControl.isActive = true
+        this.callState.remoteControl.screenWidth = data.screenWidth || 1920
+        this.callState.remoteControl.screenHeight = data.screenHeight || 1080
+        this.notifyStateChange()
+        this.notifyRemoteControlChange()
+        toaster('success', 'Remote control granted!')
+      }
+    })
+
+    socket.on('remote-control-denied', (data: { callId: string }) => {
+      if (this.callState.callId === data.callId) {
+        this.callState.remoteControl.targetUserId = null
+        this.notifyStateChange()
+        this.notifyRemoteControlChange()
+        toaster('info', 'Remote control request was denied.')
+      }
+    })
+
+    socket.on('remote-control-stopped', (data: { callId: string; userId: string }) => {
+      if (this.callState.callId === data.callId) {
+        if (this.callState.remoteControl.isActive) {
+          this.disconnectDesktopAgent()
+        }
+        this.callState.remoteControl = { ...initialRemoteControlState }
+        this.notifyStateChange()
+        this.notifyRemoteControlChange()
+        toaster('info', 'Remote control session ended.')
       }
     })
 

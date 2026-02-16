@@ -168,3 +168,13 @@ api/public/recordings/
 
 # Database dumps
 *.sql
+
+# OS generated files
+.DS_Store
+__MACOSX/
+
+# Compressed archives in app/
+app/**/*.zip
+
+# Nested git repos
+app/**/.git/
